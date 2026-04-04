@@ -1,5 +1,5 @@
 % XeLaTeX document
-\documentclass[12pt,a4paper]{article}
+\documentclass[14pt,a4paper]{article}
 
 % Редактируем: конфигурация, личные настройки: имя, название предмета и пр. для титульной страницы и метаданных документа здесь
 \include{config}
@@ -17,15 +17,9 @@
 
 \begin{document}
 \onehalfspacing
-% Не редактируем: Титульная страница (формируется автоматически из заданной конфигурации)
 \include{templates/titlepage}
-
-% Не редактируем: Страница содержания (формируется автоматически из section, subsection и пр., указанных в content.tex)
+\include{assignment}
 \include{templates/tocpage}
-
-% Редактируем: всё остальное: вступление, др. этапы, заключение, приложение
 \include{content}
-
-% Не редактируем: Страница библиографии (формируется автоматически из книжек, указанных в refs.bib и пометок \cite{имя_источника} в тексте)
 \include{templates/bibpage}
 \end{document}

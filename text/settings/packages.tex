@@ -1,15 +1,13 @@
-% настройка кодировки, шрифтов и русского языка
 \usepackage{fontspec}
-
 \usepackage{polyglossia}
-\usepackage{biblatex}
 
 \usepackage{verbatim}
+
+\usepackage{extsizes}
 
 % рабочие ссылки в документе
 \usepackage{hyperref}
 \renewcommand{\figureautorefname}{Рис.}
-
 
 % графика
 \usepackage{graphicx}
@@ -33,7 +31,7 @@
 
 % библиография
 \usepackage{csquotes}
-
+% \addbibresource{refs.bib}
 
 % установка полей
 \usepackage{geometry}
@@ -64,6 +62,13 @@
 
 \usepackage[normalem]{ulem} % для подчёркиваний uline
 
-\usepackage{polyglossia}
 \ULdepth = 0.16em % расстояние от линии до текста выше/ниже
 \usepackage{pdfpages} % вставка pdf
+
+\usepackage{biblatex}
+\addbibresource{refs.bib}
+
+\usepackage{enumitem}
+\setlist[enumerate,2]{label=\arabic*.}
+
+\usepackage{tabularx}
