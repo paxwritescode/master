@@ -14,3 +14,4 @@ LICENSE
 *.xml
 templates/*.otf
 templates/*.bbx
+main.pdf.tex
