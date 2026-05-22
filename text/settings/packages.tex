@@ -6,8 +6,13 @@
 \usepackage{extsizes}
 
 % рабочие ссылки в документе
-\usepackage{hyperref}
-\renewcommand{\figureautorefname}{Рис.}
+\usepackage[
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=black
+]{hyperref}
+\renewcommand{\figurename}{Рис.}
 
 % графика
 \usepackage{graphicx}
@@ -20,7 +25,28 @@
 
 % качественные листинги кода
 \usepackage{minted}
+\usemintedstyle{friendly}
 \usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+\lstdefinestyle{tree}{
+	backgroundcolor=\color{codebg},
+	frame=single,
+	rulecolor=\color{codeframe},
+	basicstyle=\ttfamily\normalsize
+	columns=fullflexible,
+	keepspaces=true,
+	showstringspaces=false,
+	breaklines=false,
+	xleftmargin=1em,
+	framexleftmargin=1em,
+	tabsize=2
+}
+\renewcommand{\lstlistingname}{Листинг}
+
 \usepackage{lstfiracode}
 
 % отключение копирования номеров строк из листинга, работает не во всех просмотрщиках (в Adobe Reader работает)
@@ -32,9 +58,6 @@
 % библиография
 \usepackage{csquotes}
 % \addbibresource{refs.bib}
-
-% установка полей
-\usepackage{geometry}
 
 % нумерация картинок по секциям
 \usepackage{chngcntr}
@@ -73,3 +96,15 @@
 \setlist[enumerate,2]{label=\arabic*.}
 
 \usepackage{tabularx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage[a4paper,
+	top=20mm,
+	bottom=20mm,
+	left=30mm,
+	right=10mm,
+	includehead=true,
+	includefoot=false]{geometry}
+

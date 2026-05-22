@@ -9,13 +9,6 @@
 % перечень использованных источников
 % \addbibresource{refs.bib}
 
-% настройка полей
-\geometry{top=2cm}
-\geometry{bottom=2cm}
-\geometry{left=2cm}
-\geometry{right=2cm}
-\geometry{bindingoffset=0cm}
-
 % настройка ссылок и метаданных документа
 \hypersetup{unicode=true,colorlinks=true,linkcolor=red,citecolor=green,filecolor=magenta,urlcolor=cyan,
 	pdftitle={\docname},
@@ -39,6 +32,8 @@
 
 % оформления подписи рисунка
 \captionsetup[figure]{labelsep = period}
+
+\floatname{listing}{Листинг}
 
 % подпись таблицы
 \DeclareCaptionFormat{hfillstart}{\hfill#1#2#3\par}
@@ -84,3 +79,25 @@
 \mathtoolsset{showonlyrefs=false}
 
 \numberwithin{equation}{subsection}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% фиксируем ширину под текст
+\setlength{\headwidth}{\textwidth}
+
+% номер страницы
+\fancyhead[R]{\thepage}
+
+% убираем линию
+\renewcommand{\headrulewidth}{0pt}
+
+% расстояние между header и текстом
+\setlength{\headsep}{6mm}
+
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\setlength{\headwidth}{\textwidth}
+	\fancyhead[R]{\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+}

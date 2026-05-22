@@ -1,0 +1,14 @@
+project/
+├── main.py
+├── rk_method.py
+├── test_problems.py
+├── objective_function.py
+├── optimization.py
+│
+├── coefficients/
+│   └── rk6_parametric.py
+│
+├── experiments/
+│   └── experiment_config.py
+│
+└── results/
