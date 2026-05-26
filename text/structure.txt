@@ -1,14 +1,9 @@
 project/
 ├── main.py
-├── rk_method.py
+├── rk_solver.py
 ├── test_problems.py
-├── objective_functions.py
+├── loss_function.py
 ├── optimization.py
-│
-├── coefficients/
-│   └── rk6_parametric.py
-│
-├── experiments/
-│   └── experiment_config.py
+├── symbolic_derivation.py
 │
 └── results/
