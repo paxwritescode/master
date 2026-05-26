@@ -2,7 +2,7 @@ project/
 ├── main.py
 ├── rk_method.py
 ├── test_problems.py
-├── objective_function.py
+├── objective_functions.py
 ├── optimization.py
 │
 ├── coefficients/
