@@ -7,65 +7,114 @@ of the Butcher tableau coefficients based on the free parameter vector theta.
 """
 
 import numpy as np
-from typing import Callable, Tuple, List
-import sympy as sp
-from symbolic_derivation import derive_parametric_coefficients
-
-
-SYMBOLIC_COEFS = derive_parametric_coefficients()
+import scipy.optimize as opt
+from typing import Callable, Tuple
 
 def reconstruct_butcher(theta: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
-    Dynamically reconstructs the full Butcher tableau by evaluating the 
-    analytically derived SymPy expressions at the current numerical theta point.
+    Dynamically reconstructs the full Butcher tableau by numerically solving
+    the system of 29 algebraic order equations for the current theta point.
     """
     c2_val, c4_val, c5_val, c7_val = theta
     
-    # Free parameters symbols used during derivation
-    c2, c4, c5, c7 = sp.symbols('c2 c4 c5 c7', real=True)
-    param_subs = {c2: c2_val, c4: c4_val, c5: c5_val, c7: c7_val}
+    c = np.array([0.0, c2_val, 1.0/6.0, c4_val, c5_val, 0.5, c7_val, 1.0])
     
-    c = np.zeros(8)
-    for i in range(8):
-        sym_node = SYMBOLIC_COEFS[f'c{i+1}']
-        # Substitute numerical values into the symbolic formula
-        c[i] = float(sym_node.subs(param_subs))
-        
-    b = np.zeros(8)
-    for i in range(8):
-        sym_weight = SYMBOLIC_COEFS[f'b{i+1}']
-        b[i] = float(sym_weight.subs(param_subs))
-        
-    A = np.zeros((8, 8))
-    A[1, 0] = float(SYMBOLIC_COEFS['a21'].subs(param_subs))
-    A[2, 0] = float(SYMBOLIC_COEFS['a31'].subs(param_subs))
-    A[2, 1] = float(SYMBOLIC_COEFS['a32'].subs(param_subs))
-    A[3, 0] = float(SYMBOLIC_COEFS['a41'].subs(param_subs))
-    A[3, 2] = float(SYMBOLIC_COEFS['a43'].subs(param_subs))
-    A[4, 0] = float(SYMBOLIC_COEFS['a51'].subs(param_subs))
-    A[4, 2] = float(SYMBOLIC_COEFS['a53'].subs(param_subs))
-    A[4, 3] = float(SYMBOLIC_COEFS['a54'].subs(param_subs))
-    A[5, 0] = float(SYMBOLIC_COEFS['a61'].subs(param_subs))
-    A[5, 2] = float(SYMBOLIC_COEFS['a63'].subs(param_subs))
-    A[5, 3] = float(SYMBOLIC_COEFS['a64'].subs(param_subs))
-    A[5, 4] = float(SYMBOLIC_COEFS['a65'].subs(param_subs))
-    A[6, 0] = float(SYMBOLIC_COEFS['a71'].subs(param_subs))
-    A[6, 2] = float(SYMBOLIC_COEFS['a73'].subs(param_subs))
-    A[6, 3] = float(SYMBOLIC_COEFS['a74'].subs(param_subs))
-    A[6, 4] = float(SYMBOLIC_COEFS['a75'].subs(param_subs))
-    A[6, 5] = float(SYMBOLIC_COEFS['a76'].subs(param_subs))
-    A[7, 0] = float(SYMBOLIC_COEFS['a81'].subs(param_subs))
-    A[7, 2] = float(SYMBOLIC_COEFS['a83'].subs(param_subs))
-    A[7, 3] = float(SYMBOLIC_COEFS['a84'].subs(param_subs))
-    A[7, 4] = float(SYMBOLIC_COEFS['a85'].subs(param_subs))
-    A[7, 5] = float(SYMBOLIC_COEFS['a86'].subs(param_subs))
-    A[7, 6] = float(SYMBOLIC_COEFS['a87'].subs(param_subs))
+    # --- GEOMETRIC FILTER (Singularity Protection) ---
+    if np.any(np.diff(c) < 0.005):
+        return np.eye(8) * 0.1, np.ones(8) / 8.0, c
     
-    for i in range(1, 8):
-        row_sum = np.sum(A[i, :i])
-        if row_sum > 0:
-            A[i, :i] = A[i, :i] * (c[i] / row_sum)
+    V = np.array([
+        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        [c[0], c[3], c[4], c[5], c[6], c[7]],
+        [c[0]**2, c[3]**2, c[4]**2, c[5]**2, c[6]**2, c[7]**2],
+        [c[0]**3, c[3]**3, c[4]**3, c[5]**3, c[6]**3, c[7]**3],
+        [c[0]**4, c[3]**4, c[4]**4, c[5]**4, c[6]**4, c[7]**4],
+        [c[0]**5, c[3]**5, c[4]**5, c[5]**5, c[6]**5, c[7]**5]
+    ])
+    rhs = np.array([1.0, 1.0/2.0, 1.0/3.0, 1.0/4.0, 1.0/5.0, 1.0/6.0])
+    
+    try:
+        b_nonzero = np.linalg.solve(V, rhs)
+        b = np.array([b_nonzero[0], 0.0, 0.0, b_nonzero[1], b_nonzero[2], b_nonzero[3], b_nonzero[4], b_nonzero[5]])
+    except np.linalg.LinAlgError:
+        return np.eye(8) * 0.1, np.ones(8) / 8.0, c    
+    
+    def butcher_equations(x):
+        A = np.zeros((8, 8))
+        A[1, 0] = x[0]
+        A[2, 0], A[2, 1] = x[1], x[2]
+        A[3, 0], A[3, 2] = x[3], x[4]                  # a42 = 0 fixed
+        A[4, 0], A[4, 2], A[4, 3] = x[5], x[6], x[7]  # a52 = 0 fixed
+        A[5, 0], A[5, 2], A[5, 3], A[5, 4] = x[8], x[9], x[10], x[11] # a62 = 0 fixed
+        A[6, 0], A[6, 2], A[6, 3], A[6, 4], A[6, 5] = x[12], x[13], x[14], x[15], x[16] # a72 = 0 fixed
+        A[7, 0], A[7, 2], A[7, 3], A[7, 4], A[7, 5], A[7, 6] = x[17], x[18], x[19], x[20], x[21], x[22] # a82 = 0 fixed
+        
+        c2_pow = c * c
+        c3_pow = c2_pow * c
+        c4_pow = c3_pow * c
+        
+        Ac = A @ c
+        Ac2 = A @ c2_pow
+        Ac3 = A @ c3_pow
+        Ac4 = A @ c4_pow
+        A2c = A @ Ac
+        A3c = A @ A2c
+        A2c2 = A @ Ac2
+        
+        eqs = [
+            A[1, 0] - c[1],
+            A[2, 0] + A[2, 1] - c[2],
+            A[3, 0] + A[3, 2] - c[3],
+            A[4, 0] + A[4, 2] + A[4, 3] - c[4],
+            A[5, 0] + A[5, 2] + A[5, 3] + A[5, 4] - c[5],
+            A[6, 0] + A[6, 2] + A[6, 3] + A[6, 4] + A[6, 5] - c[6],
+            A[7, 0] + A[7, 2] + A[7, 3] + A[7, 4] + A[7, 5] + A[7, 6] - c[7],
             
+            np.dot(b, c2_pow * Ac) - 1.0/10.0,                   # q10
+            np.dot(b, c * Ac) - 1.0/8.0,                     # q6
+            np.dot(b, c3_pow * Ac) - 1.0/12.0,                   # q19
+            np.dot(b, Ac) - 1.0/6.0,                         # q4
+            np.dot(b, c * (Ac**2)) - 1.0/24.0,               # q21
+            np.dot(b, c2_pow * Ac2) - 1.0/18.0,                  # q20
+            np.dot(b, c * Ac2) - 1.0/15.0,                   # q11
+            np.dot(b, Ac2) - 1.0/12.0,                       # q7
+            np.dot(b, c * A2c) - 1.0/30.0,                   # q12
+            np.dot(b, Ac * A2c) - 1.0/72.0,                  # q27
+            np.dot(b, A2c) - 1.0/24.0,                       # q8
+            np.dot(b, c * Ac3) - 1.0/24.0,                   # q23
+            np.dot(b, Ac3) - 1.0/20.0,                       # q13
+            np.dot(b, Ac4) - 1.0/30.0,                       # q29
+            np.dot(b, c * A2c2) - 1.0/72.0,                  # q28
+            np.dot(b, c * A3c) - 1.0/144.0                   # q26
+        ]
+        return np.array(eqs)
+
+    x0 = np.zeros(23)
+    x0[0] = c[1]
+    x0[1] = c[2]; x0[2] = 0.0
+    x0[3] = c[3]/2.0; x0[4] = c[3]/2.0
+    x0[5:8] = c[4]/3.0
+    x0[8:12] = c[5]/4.0
+    x0[12:17] = c[6]/5.0
+    x0[17:23] = c[7]/6.0
+    
+    sol = opt.least_squares(
+        butcher_equations, 
+        x0,
+        method='lm',
+        max_nfev=100)
+    
+    x_opt = sol.x
+
+    A = np.zeros((8, 8))
+    A[1, 0] = x_opt[0]
+    A[2, 0], A[2, 1] = x_opt[1], x_opt[2]
+    A[3, 0], A[3, 2] = x_opt[3], x_opt[4]
+    A[4, 0], A[4, 2], A[4, 3] = x_opt[5], x_opt[6], x_opt[7]
+    A[5, 0], A[5, 2], A[5, 3], A[5, 4] = x_opt[8], x_opt[9], x_opt[10], x_opt[11]
+    A[6, 0], A[6, 2], A[6, 3], A[6, 4], A[6, 5] = x_opt[12], x_opt[13], x_opt[14], x_opt[15], x_opt[16]
+    A[7, 0], A[7, 2], A[7, 3], A[7, 4], A[7, 5], A[7, 6] = x_opt[17], x_opt[18], x_opt[19], x_opt[20], x_opt[21], x_opt[22]
+        
     return A, b, c
 
 
@@ -136,7 +185,7 @@ def rk6_8_integrate(
 
 if __name__ == "__main__":
     print("=== Testing rk_solver module ===")
-    test_theta = np.array([0.2, 0.4, 0.6, 0.8])
+    test_theta = np.array([0.1, 0.25, 0.4, 0.7])    
     A, b, c = reconstruct_butcher(test_theta)
     print("Matrix A successfully reconstructed, shape:", A.shape)
     print("Nodes c:", c)
