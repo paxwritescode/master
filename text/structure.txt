@@ -4,6 +4,5 @@ project/
 ├── test_problems.py
 ├── loss_function.py
 ├── optimization.py
-├── symbolic_derivation.py
 │
 └── results/
