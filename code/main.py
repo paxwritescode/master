@@ -152,7 +152,7 @@ def run_computational_experiment():
             "id": 3,
             "name": "Gravitational Two-Body Problem",
             "rhs": rhs_two_body,
-            "u0": np.array([1.0, 0.0, 0.0, 0.5]),
+            "u0": np.array([1.0, 0.0, 0.0, 1.0]),
             "t_span": (0.0, 15.0),
             "h": 0.1,
             "exact": None

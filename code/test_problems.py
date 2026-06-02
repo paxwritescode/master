@@ -54,9 +54,15 @@ def get_nls_setup(Nx: int = 4, Ny: int = 4, dx: float = 0.5, dy: float = 0.5) ->
     idx = 0
     for i in range(Nx):
         for j in range(Ny):
-            x = i * dx - (Nx * dx) / 2.0
-            y = j * dy - (Ny * dy) / 2.0
-            u0[idx] = np.exp(-(x**2 + y**2))
+            x_val = i * dx - (Nx * dx) / 2.0
+            u0[idx] = np.sqrt(2) * np.tanh(x_val) * np.cos(x_val)
+            idx += 1
+            
+    # Затем заполняем мнимую часть (следующие Nx*Ny элементов)
+    for i in range(Nx):
+        for j in range(Ny):
+            x_val = i * dx - (Nx * dx) / 2.0
+            u0[idx] = np.sqrt(2) * np.tanh(x_val) * np.sin(x_val)
             idx += 1
             
     def rhs_nls(t: float, u: np.ndarray, beta: float = 1.0) -> np.ndarray:
