@@ -4,5 +4,6 @@ project/
 ├── test_problems.py
 ├── loss_function.py
 ├── optimization.py
-│
+├── visualizer.py
+├── extended_experiments.py
 └── results/
