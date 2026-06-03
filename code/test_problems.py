@@ -58,7 +58,6 @@ def get_nls_setup(Nx: int = 4, Ny: int = 4, dx: float = 0.5, dy: float = 0.5) ->
             u0[idx] = np.sqrt(2) * np.tanh(x_val) * np.cos(x_val)
             idx += 1
             
-    # Затем заполняем мнимую часть (следующие Nx*Ny элементов)
     for i in range(Nx):
         for j in range(Ny):
             x_val = i * dx - (Nx * dx) / 2.0

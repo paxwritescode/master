@@ -6,7 +6,7 @@ from scipy.interpolate import CubicSpline
 
 # Direct imports from your existing project modules
 from rk_solver import rk6_8_integrate
-from test_problems import rhs_oscillator, exact_oscillator, get_nls_setup
+from test_problems import rhs_oscillator, exact_oscillator, get_nls_setup, rhs_two_body, rhs_outer_planets
 
 # =========================================================================
 # GLOBAL MATPLOTLIB CONFIGURATION FOR ACADEMIC PAPERS
@@ -65,7 +65,7 @@ def plot_harmonic_oscillator():
     plt.legend(loc='lower left', frameon=True, facecolor='white', edgecolor='gainsboro')
     plt.tight_layout()
 
-    output_path = "results/oscillator_visualized.pdf"
+    output_path = "results/visualization/oscillator_visualized.pdf"
     plt.savefig(output_path, dpi=300)
     print(f"Success! Oscillator plot saved to '{output_path}'")
     plt.close()
@@ -196,9 +196,171 @@ def plot_nls_components():
     plt.subplots_adjust(top=0.85)
 
     # Save high-quality vector graphic for LaTeX
-    output_path = "results/nls_components_visualized.pdf"
+    output_path = "results/visualization/nls_components_visualized.pdf"
     plt.savefig(output_path, dpi=300)
     print(f"Success! Side-by-side NLS component step comparison saved to '{output_path}'")
+    plt.close()
+    
+def plot_two_body_orbit():
+    """
+    Simulates and visualizes the Gravitational Two-Body (Kepler) problem.
+    Plots the spatial orbit (Y vs X) on the left, and the explicit temporal 
+    coordinate oscillations (X vs t) on the right to demonstrate phase-lag tracking.
+    """
+    print("\n--- Generating Gravitational Two-Body Orbit & Oscillations ---")
+    
+    # 1. Setup system parameters (State vector: [x, y, vx, vy])
+    u0 = np.array([1.0, 0.0, 0.0, 0.9])
+    t_span = (0.0, 15.0)
+    
+    h_large = 0.4
+    h_good = 0.04
+    theta_optimized = np.array([0.09010, 0.23948, 0.42150, 0.87405])
+
+    # 2. Compute numerical integrations via your optimized RK6 solver
+    print("Integrating Kepler system with a large step (h = 0.25)...")
+    t_large, u_large = rk6_8_integrate(rhs_two_body, u0, t_span, h_large, theta_optimized)
+    
+    print("Integrating Kepler system with a good step (h = 0.05)...")
+    t_good, u_good = rk6_8_integrate(rhs_two_body, u0, t_span, h_good, theta_optimized)
+
+    # 3. Compute reference baseline via high-precision DOP853
+    print("Computing high-precision Kepler reference via DOP853...")
+    t_fine = np.linspace(t_span[0], t_span[1], 1000)
+    ref_sol = solve_ivp(rhs_two_body, t_span, u0, method='DOP853', t_eval=t_fine, atol=1e-13, rtol=1e-13)
+    u_exact = ref_sol.y.T
+
+    # =========================================================================
+    # SIDE-BY-SIDE PLOTS: ORBIT MAP (LEFT) AND COORDINATE OSCILLATIONS (RIGHT)
+    # =========================================================================
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5))
+
+    # -------------------------------------------------------------------------
+    # LEFT SUBPLOT: Spatial Trajectory (The Orbit)
+    # -------------------------------------------------------------------------
+    ax1.plot(u_exact[:, 0], u_exact[:, 1], color='black', linestyle='-', linewidth=2, 
+             label='Exact Elliptical Orbit (DOP853)')
+    ax1.plot(u_good[:, 0], u_good[:, 1], color='tab:blue', linestyle='-.', linewidth=1.6, 
+             label=f'Optimized RK6 ($h = {h_good}$)')
+    ax1.plot(u_large[:, 0], u_large[:, 1], color='tab:red', linestyle='--', linewidth=1.4, 
+             label=f'Optimized RK6 ($h = {h_large}$)')
+    ax1.scatter([0], [0], color='orange', s=100, zorder=5, label='Central Mass')
+    
+    ax1.set_xlabel('x$', fontsize=11)
+    ax1.set_ylabel('y$', fontsize=11)
+    ax1.set_title('Space Domain: Trajectory Orbit Stability', fontsize=12, pad=10)
+    ax1.set_xlim(-1.5, 1.5)
+    ax1.set_ylim(-1.5, 1.5)
+    ax1.set_aspect('equal') # Keep the circle perfectly round
+    ax1.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
+    ax1.grid(True, linestyle=':', alpha=0.6)
+
+    # -------------------------------------------------------------------------
+    # RIGHT SUBPLOT: Temporal Oscillations (The Coordinate Waves)
+    # -------------------------------------------------------------------------
+    ax2.plot(t_fine, u_exact[:, 0], color='black', linestyle='-', linewidth=2, 
+             label='Exact Solution')
+    ax2.plot(t_good, u_good[:, 0], color='tab:blue', linestyle='-.', linewidth=1.6, 
+             label=f'Optimized RK6 ($h = {h_good}$)')
+    ax2.plot(t_large, u_large[:, 0], color='tab:red', linestyle='--', marker='s', markevery=3, markersize=4, linewidth=1.4, 
+             label=f'Optimized RK6 ($h = {h_large}$)')
+    
+    ax2.set_xlabel('$Time $t$', fontsize=11)
+    ax2.set_ylabel('$x(t)$', fontsize=11)
+    ax2.set_title('Time Domain: Coordinate $x(t)$ Oscillations', fontsize=12, pad=10)
+    ax2.set_xlim(t_span)
+    ax2.set_ylim(-1.4, 1.4)
+    ax2.legend(loc='lower left', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
+    ax2.grid(True, linestyle=':', alpha=0.6)
+
+    plt.suptitle('Dynamics of the Gravitational Two-Body Kepler Problem', fontsize=14, fontweight='bold', y=0.98)
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.85)
+
+    # Save high-quality vector graphic for LaTeX
+    output_path = "results/visualization/twobody_orbit_comparison.pdf"
+    plt.savefig(output_path, dpi=300)
+    print(f"Success! Twin Kepler plot saved to '{output_path}'")
+    plt.close()
+
+def plot_outer_planets_orbits():
+    """
+    Simulates and visualizes the 24-D N-Body Outer Planets problem.
+    Plots the spatial concentric orbits (Y vs X) on the left, and the temporal
+    coordinate oscillations x(t) for selected planets on the right to match the 
+    thesis focus on oscillatory solutions.
+    """
+    print("\n--- Generating Outer Planets N-Body Visualization ---")
+    
+    # 1. Setup initial conditions (6 bodies x 4 variables = 24 dimensions)
+    u0_planets = np.zeros(24)
+    u0_planets[0::4] = np.array([0.0, 5.2, 9.5, 19.2, 30.1, 39.5])      # Initial X positions (AU)
+    u0_planets[3::4] = np.array([0.0, 0.438, 0.324, 0.228, 0.182, 0.159]) # Initial Vy velocities
+    
+    # We set t_span to 100.0 to observe multiple complete wave cycles for inner planets
+    t_span = (0.0, 175.0) 
+    h = 0.1
+    theta_optimized = np.array([0.09010, 0.23948, 0.42150, 0.87405])
+
+    # 2. Integrate using the optimized RK6 solver
+    print("Integrating 24-D Outer Planets system...")
+    t_steps, u_sol = rk6_8_integrate(rhs_outer_planets, u0_planets, t_span, h, theta_optimized)
+
+    # 3. Create Side-by-Side Figure
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13.5, 6))
+
+    # Metadata for plotting the solar system bodies
+    body_names = ['Sun', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']
+    body_colors = ['gold', 'chocolate', 'goldenrod', 'lightseagreen', 'royalblue', 'purple']
+    body_sizes = [100, 50, 45, 35, 35, 15] # Visual hierarchy
+
+    # -------------------------------------------------------------------------
+    # LEFT SUBPLOT: Space Domain (Concentric Orbits Map)
+    # -------------------------------------------------------------------------
+    for i in range(6):
+        idx = i * 4
+        x_coords = u_sol[:, idx]
+        y_coords = u_sol[:, idx + 1]
+        
+        # Plot orbital trajectory paths
+        ax1.plot(x_coords, y_coords, color=body_colors[i], linestyle='-', linewidth=1.3, alpha=0.8)
+        # Mark current planet positions at the final time layer T = 100.0
+        ax1.scatter(x_coords[-1], y_coords[-1], color=body_colors[i], s=body_sizes[i], zorder=4, label=body_names[i])
+
+    ax1.set_xlabel('$X$ (AU)', fontsize=11)
+    ax1.set_ylabel('$Y$ (AU)', fontsize=11)
+    ax1.set_title('Space Domain: Concentric Planetary Orbits', fontsize=12, pad=10)
+    # ax1.set_xlim(-45, 45)
+    # ax1.set_ylim(-45, 45)
+    ax1.set_aspect('equal') # Crucial to ensure orbits remain circular/elliptical without stretching
+    ax1.grid(True, linestyle=':', alpha=0.5)
+    ax1.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
+
+    # -------------------------------------------------------------------------
+    # RIGHT SUBPLOT: Time Domain (Planetary Position Oscillations)
+    # -------------------------------------------------------------------------
+    # Extracting and plotting Jupiter (i=1, index 4) and Saturn (i=2, index 8) 
+    # to show distinct frequencies and clean sinusoidal oscillations.
+    ax2.plot(t_steps, u_sol[:, 4], color='chocolate', linestyle='-', linewidth=1.6, label='Jupiter $x_1(t)$')
+    ax2.plot(t_steps, u_sol[:, 8], color='goldenrod', linestyle='--', linewidth=1.6, label='Saturn $x_2(t)$')
+
+    ax2.set_xlabel('$t$', fontsize=11)
+    ax2.set_ylabel('x(t)$ (AU)', fontsize=11)
+    ax2.set_title('Time Domain: Selected Coordinate Oscillations', fontsize=12, pad=10)
+    # ax2.set_xlim(t_span)
+    # ax2.set_ylim(-12, 12) # Fits Jupiter (~5.2 AU) and Saturn (~9.5 AU) amplitudes perfectly
+    ax2.grid(True, linestyle=':', alpha=0.5)
+    ax2.legend(loc='lower left', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=10)
+
+    # Main combined figure title
+    plt.suptitle('N-Body Outer Planets Simulation', fontsize=14, fontweight='bold', y=0.98)
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.85)
+
+    # Save high-quality vector graphic for LaTeX
+    output_path = "results/visualization/nbody_planets_orbits.pdf"
+    plt.savefig(output_path, dpi=300)
+    print(f"Success! Side-by-side N-body planetary plot saved to '{output_path}'")
     plt.close()
 
 def main():
@@ -210,6 +372,8 @@ def main():
     print("=========================================================================")
     plot_harmonic_oscillator()
     plot_nls_components()
+    plot_two_body_orbit()
+    plot_outer_planets_orbits()
     
     print("=========================================================================")
     print("All tasks completed successfully! Check the 'results/' folder for PDFs.")
