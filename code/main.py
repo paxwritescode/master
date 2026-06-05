@@ -199,7 +199,7 @@ def run_computational_experiment():
         print(f"[{task['name']}] Running Deterministic Grid Search...")
         start_time = time.time()
         theta_grid, loss_grid = grid_search_optimization(current_loss_func)
-        time_grid = time.time() - start_time
+        time_grid_ms = (time.time() - start_time) * 1000.0
         
         # -------------------------------------------------------------------------
         # STAGE 2: Particle Swarm Optimization (Global Stochastic Descent)
@@ -211,14 +211,19 @@ def run_computational_experiment():
             num_particles=30,
             max_iter=30 
         )
-        time_pso = time.time() - start_time
+        time_pso_ms = (time.time() - start_time) * 1000.0
         
         # -------------------------------------------------------------------------
         # STAGE 3: Hybrid Local Polishing (Nelder-Mead Refinement)
         # -------------------------------------------------------------------------
         print(f"[{task['name']}] Polishing PSO Champion via Nelder-Mead Simplex...")
+        start_time = time.time()
         theta_final, loss_final = local_polish_optimization(current_loss_func, theta_pso)
+        time_polish_ms = (time.time() - start_time) * 1000.0
         
+        total_time_ms = time_grid_ms + time_pso_ms + time_polish_ms
+        
+        # Log localized telemetry values internally
         # Log localized telemetry values internally
         print(f"\n>>> BENCHMARK {task['id']} COMPLETE <<<")
         print(f"  Baseline Loss : {baseline_loss:.6e}")
@@ -226,6 +231,14 @@ def run_computational_experiment():
         print(f"  Polished Hybrid: {loss_final:.6e}")
         print(f"  Accuracy Gain : {baseline_loss / (loss_final + 1e-15):.2f}x better")
         print(f"  Optimal Nodes : {np.round(theta_final, 5).tolist()}")
+        print(f"  Time Grid Search: {time_grid_ms:.2f} ms")
+        print(f"  Time PSO Search : {time_pso_ms:.2f} ms")
+        print(f"  Time Local Polish: {time_polish_ms:.2f} ms")
+        print(f"  Total Optimization Time: {total_time_ms:.2f} ms")
+        
+        # Вывод критически важной телеметрии напрямую в терминал
+        print_to_console(f"     [Telemetry] PSO Step Execution Time : {time_pso_ms:.4f} ms")
+        print_to_console(f"     [Telemetry] Total Cascade Time     : {total_time_ms:.4f} ms")
         
         # Append calculated structures to global summary array mapping
         summary_results.append({
@@ -235,8 +248,9 @@ def run_computational_experiment():
             "grid": loss_grid,
             "final": loss_final,
             "theta": np.round(theta_final, 5).tolist(),
-            "time": time_grid + time_pso
+            "time_ms": total_time_ms
         })
+        print_to_console("  -> Cascade completed successfully. Phase-lag errors minimized.")
         print_to_console("  -> Cascade completed successfully. Phase-lag errors minimized.")
 
 

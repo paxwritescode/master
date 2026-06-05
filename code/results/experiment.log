@@ -20,49 +20,53 @@
 [Linear Harmonic Oscillator] Running Stochastic Particle Swarm Optimization...
 
 [PSO] Spawning population of 30 particles across partitioned 4-D space...
-Iteration 01/30 | Swarm Champion Global Loss: 5.028290e-07
-Iteration 02/30 | Swarm Champion Global Loss: 2.076772e-07
-Iteration 03/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 04/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 05/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 06/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 07/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 08/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 09/30 | Swarm Champion Global Loss: 1.568886e-07
-Iteration 10/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 11/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 12/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 13/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 14/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 15/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 16/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 17/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 18/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 19/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 20/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 21/30 | Swarm Champion Global Loss: 8.075004e-08
-Iteration 22/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 23/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 24/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 25/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 26/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 27/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 28/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 29/30 | Swarm Champion Global Loss: 2.658025e-08
-Iteration 30/30 | Swarm Champion Global Loss: 2.658025e-08
+Iteration 01/30 | Swarm Champion Global Loss: 2.150594e-06
+Iteration 02/30 | Swarm Champion Global Loss: 1.115876e-06
+Iteration 03/30 | Swarm Champion Global Loss: 5.146959e-07
+Iteration 04/30 | Swarm Champion Global Loss: 4.335057e-07
+Iteration 05/30 | Swarm Champion Global Loss: 4.335057e-07
+Iteration 06/30 | Swarm Champion Global Loss: 4.335057e-07
+Iteration 07/30 | Swarm Champion Global Loss: 1.654396e-07
+Iteration 08/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 09/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 10/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 11/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 12/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 13/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 14/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 15/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 16/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 17/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 18/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 19/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 20/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 21/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 22/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 23/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 24/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 25/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 26/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 27/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 28/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 29/30 | Swarm Champion Global Loss: 4.835033e-08
+Iteration 30/30 | Swarm Champion Global Loss: 4.835033e-08
 [Linear Harmonic Oscillator] Polishing PSO Champion via Nelder-Mead Simplex...
 
 ======================================================================
 [HYBRID] Starting high-precision local polishing of the PSO champion...
 ======================================================================
-[HYBRID] Polishing successfully converged in 56 iterations.
+[HYBRID] Polishing successfully converged in 62 iterations.
 
 >>> BENCHMARK 1 COMPLETE <<<
   Baseline Loss : 2.799927e-05
   Grid Search   : 1.224147e-07
-  Polished Hybrid: 1.473376e-09
-  Accuracy Gain : 19003.47x better
-  Optimal Nodes : [0.05366, 0.30607, 0.48665, 0.71797]
+  Polished Hybrid: 1.906312e-08
+  Accuracy Gain : 1468.77x better
+  Optimal Nodes : [0.04799, 0.27654, 0.49118, 0.83115]
+  Time Grid Search: 4407.47 ms
+  Time PSO Search : 15348.81 ms
+  Time Local Polish: 2684.28 ms
+  Total Optimization Time: 22440.56 ms
 
 ###########################################################################
   PROCESSING BENCHMARK 2: Nonlinear Schrodinger Equation (NLS 2D)
@@ -72,7 +76,7 @@ Iteration 30/30 | Swarm Champion Global Loss: 2.658025e-08
 
 [Grid Search] Initializing coarse multi-stage deterministic search...
 [Grid Search] Completed coarse stage. Evaluated: 72 safe configurations.
-[Grid Search] Coarse Optimum: [0.15       0.35       0.495      0.67333333] | Loss: 9.685373e-05
+[Grid Search] Coarse Optimum: [0.15       0.35       0.495      0.67333333] | Loss: 9.602444e-05
 [Grid Search] Executing multi-stage adaptive local refinement...
   -> Stage 1/3 | Step: 0.0400 | Current Best Loss: 9.602444e-05
   -> Stage 2/3 | Step: 0.0200 | Current Best Loss: 9.602444e-05
@@ -82,36 +86,36 @@ Iteration 30/30 | Swarm Champion Global Loss: 2.658025e-08
 [Nonlinear Schrodinger Equation (NLS 2D)] Running Stochastic Particle Swarm Optimization...
 
 [PSO] Spawning population of 30 particles across partitioned 4-D space...
-Iteration 01/30 | Swarm Champion Global Loss: 2.529692e-04
-Iteration 02/30 | Swarm Champion Global Loss: 2.529692e-04
-Iteration 03/30 | Swarm Champion Global Loss: 9.493927e-05
-Iteration 04/30 | Swarm Champion Global Loss: 9.493927e-05
-Iteration 05/30 | Swarm Champion Global Loss: 9.493927e-05
-Iteration 06/30 | Swarm Champion Global Loss: 9.493927e-05
-Iteration 07/30 | Swarm Champion Global Loss: 3.249413e-05
-Iteration 08/30 | Swarm Champion Global Loss: 3.249413e-05
-Iteration 09/30 | Swarm Champion Global Loss: 3.249413e-05
-Iteration 10/30 | Swarm Champion Global Loss: 3.249413e-05
-Iteration 11/30 | Swarm Champion Global Loss: 2.761497e-05
-Iteration 12/30 | Swarm Champion Global Loss: 2.761497e-05
-Iteration 13/30 | Swarm Champion Global Loss: 2.761497e-05
-Iteration 14/30 | Swarm Champion Global Loss: 2.761497e-05
-Iteration 15/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 16/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 17/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 18/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 19/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 20/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 21/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 22/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 23/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 24/30 | Swarm Champion Global Loss: 2.015056e-05
-Iteration 25/30 | Swarm Champion Global Loss: 1.431029e-05
-Iteration 26/30 | Swarm Champion Global Loss: 1.431029e-05
-Iteration 27/30 | Swarm Champion Global Loss: 1.431029e-05
-Iteration 28/30 | Swarm Champion Global Loss: 1.431029e-05
-Iteration 29/30 | Swarm Champion Global Loss: 1.431029e-05
-Iteration 30/30 | Swarm Champion Global Loss: 1.431029e-05
+Iteration 01/30 | Swarm Champion Global Loss: 1.201832e-04
+Iteration 02/30 | Swarm Champion Global Loss: 1.201832e-04
+Iteration 03/30 | Swarm Champion Global Loss: 1.201832e-04
+Iteration 04/30 | Swarm Champion Global Loss: 5.037307e-05
+Iteration 05/30 | Swarm Champion Global Loss: 5.037307e-05
+Iteration 06/30 | Swarm Champion Global Loss: 5.037307e-05
+Iteration 07/30 | Swarm Champion Global Loss: 5.037307e-05
+Iteration 08/30 | Swarm Champion Global Loss: 5.037307e-05
+Iteration 09/30 | Swarm Champion Global Loss: 4.475183e-05
+Iteration 10/30 | Swarm Champion Global Loss: 4.475183e-05
+Iteration 11/30 | Swarm Champion Global Loss: 4.475183e-05
+Iteration 12/30 | Swarm Champion Global Loss: 4.475183e-05
+Iteration 13/30 | Swarm Champion Global Loss: 3.254575e-05
+Iteration 14/30 | Swarm Champion Global Loss: 3.254575e-05
+Iteration 15/30 | Swarm Champion Global Loss: 3.254575e-05
+Iteration 16/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 17/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 18/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 19/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 20/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 21/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 22/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 23/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 24/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 25/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 26/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 27/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 28/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 29/30 | Swarm Champion Global Loss: 3.024465e-05
+Iteration 30/30 | Swarm Champion Global Loss: 1.642911e-05
 [Nonlinear Schrodinger Equation (NLS 2D)] Polishing PSO Champion via Nelder-Mead Simplex...
 
 ======================================================================
@@ -122,9 +126,13 @@ Iteration 30/30 | Swarm Champion Global Loss: 1.431029e-05
 >>> BENCHMARK 2 COMPLETE <<<
   Baseline Loss : 1.184971e-03
   Grid Search   : 9.602444e-05
-  Polished Hybrid: 1.280823e-05
-  Accuracy Gain : 92.52x better
-  Optimal Nodes : [0.09341, 0.25965, 0.37275, 0.97998]
+  Polished Hybrid: 1.230689e-05
+  Accuracy Gain : 96.29x better
+  Optimal Nodes : [0.12847, 0.2478, 0.35545, 0.96336]
+  Time Grid Search: 4920.84 ms
+  Time PSO Search : 34767.03 ms
+  Time Local Polish: 29385.70 ms
+  Total Optimization Time: 69073.57 ms
 
 ###########################################################################
   PROCESSING BENCHMARK 3: Gravitational Two-Body Problem
@@ -144,50 +152,54 @@ Iteration 30/30 | Swarm Champion Global Loss: 1.431029e-05
 [Gravitational Two-Body Problem] Running Stochastic Particle Swarm Optimization...
 
 [PSO] Spawning population of 30 particles across partitioned 4-D space...
-Iteration 01/30 | Swarm Champion Global Loss: 6.674582e-06
-Iteration 02/30 | Swarm Champion Global Loss: 6.674582e-06
-Iteration 03/30 | Swarm Champion Global Loss: 4.468001e-06
-Iteration 04/30 | Swarm Champion Global Loss: 7.084313e-07
-Iteration 05/30 | Swarm Champion Global Loss: 7.084313e-07
-Iteration 06/30 | Swarm Champion Global Loss: 7.084313e-07
-Iteration 07/30 | Swarm Champion Global Loss: 7.084313e-07
-Iteration 08/30 | Swarm Champion Global Loss: 7.084313e-07
-Iteration 09/30 | Swarm Champion Global Loss: 7.084313e-07
-Iteration 10/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 11/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 12/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 13/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 14/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 15/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 16/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 17/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 18/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 19/30 | Swarm Champion Global Loss: 4.001524e-07
-Iteration 20/30 | Swarm Champion Global Loss: 6.419758e-08
-Iteration 21/30 | Swarm Champion Global Loss: 6.419758e-08
-Iteration 22/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 23/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 24/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 25/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 26/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 27/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 28/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 29/30 | Swarm Champion Global Loss: 4.823280e-08
-Iteration 30/30 | Swarm Champion Global Loss: 4.823280e-08
+Iteration 01/30 | Swarm Champion Global Loss: 3.216729e-06
+Iteration 02/30 | Swarm Champion Global Loss: 6.497926e-07
+Iteration 03/30 | Swarm Champion Global Loss: 6.497926e-07
+Iteration 04/30 | Swarm Champion Global Loss: 6.497926e-07
+Iteration 05/30 | Swarm Champion Global Loss: 2.999725e-07
+Iteration 06/30 | Swarm Champion Global Loss: 2.999725e-07
+Iteration 07/30 | Swarm Champion Global Loss: 2.999725e-07
+Iteration 08/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 09/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 10/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 11/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 12/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 13/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 14/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 15/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 16/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 17/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 18/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 19/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 20/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 21/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 22/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 23/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 24/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 25/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 26/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 27/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 28/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 29/30 | Swarm Champion Global Loss: 1.524582e-07
+Iteration 30/30 | Swarm Champion Global Loss: 1.524582e-07
 [Gravitational Two-Body Problem] Polishing PSO Champion via Nelder-Mead Simplex...
 
 ======================================================================
 [HYBRID] Starting high-precision local polishing of the PSO champion...
 ======================================================================
-[HYBRID] Polishing successfully converged in 125 iterations.
+[HYBRID] Warning: Polishing reached iteration limit or stopped early.
 
 >>> BENCHMARK 3 COMPLETE <<<
   Baseline Loss : 1.838041e-04
   Grid Search   : 1.701595e-06
-  Polished Hybrid: 2.891375e-08
-  Accuracy Gain : 6356.98x better
-  Optimal Nodes : [0.04199, 0.34985, 0.47934, 0.74269]
-  
+  Polished Hybrid: 1.325284e-07
+  Accuracy Gain : 1386.90x better
+  Optimal Nodes : [0.02409, 0.27103, 0.49498, 0.73708]
+  Time Grid Search: 3791.52 ms
+  Time PSO Search : 22216.92 ms
+  Time Local Polish: 17913.23 ms
+  Total Optimization Time: 43921.67 ms
+
 ###########################################################################
   PROCESSING BENCHMARK 4: Gravitational Outer Planets Problem (24D)
 ###########################################################################
@@ -196,56 +208,60 @@ Iteration 30/30 | Swarm Champion Global Loss: 4.823280e-08
 
 [Grid Search] Initializing coarse multi-stage deterministic search...
 [Grid Search] Completed coarse stage. Evaluated: 72 safe configurations.
-[Grid Search] Coarse Optimum: [0.08       0.26       0.495      0.67333333] | Loss: 1.553606e-09
+[Grid Search] Coarse Optimum: [0.01       0.35       0.495      0.67333333] | Loss: 9.017313e-10
 [Grid Search] Executing multi-stage adaptive local refinement...
-  -> Stage 1/3 | Step: 0.0400 | Current Best Loss: 1.430306e-09
-  -> Stage 2/3 | Step: 0.0200 | Current Best Loss: 2.241012e-10
-  -> Stage 3/3 | Step: 0.0100 | Current Best Loss: 4.369187e-11
-[Grid Search] Refinement completed. Extra evaluations: 189, Extra pruned: 0
-[Grid Search] Total processed configurations: 261 | Total bypassed: 9
+  -> Stage 1/3 | Step: 0.0400 | Current Best Loss: 4.832715e-11
+  -> Stage 2/3 | Step: 0.0200 | Current Best Loss: 4.832715e-11
+  -> Stage 3/3 | Step: 0.0100 | Current Best Loss: 4.832715e-11
+[Grid Search] Refinement completed. Extra evaluations: 96, Extra pruned: 0
+[Grid Search] Total processed configurations: 168 | Total bypassed: 9
 [Gravitational Outer Planets Problem (24D)] Running Stochastic Particle Swarm Optimization...
 
 [PSO] Spawning population of 30 particles across partitioned 4-D space...
-Iteration 01/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 02/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 03/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 04/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 05/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 06/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 07/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 08/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 09/30 | Swarm Champion Global Loss: 1.026952e-09
-Iteration 10/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 11/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 12/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 13/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 14/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 15/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 16/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 17/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 18/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 19/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 20/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 21/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 22/30 | Swarm Champion Global Loss: 6.467625e-10
-Iteration 23/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 24/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 25/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 26/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 27/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 28/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 29/30 | Swarm Champion Global Loss: 2.371244e-10
-Iteration 30/30 | Swarm Champion Global Loss: 2.371244e-10
+Iteration 01/30 | Swarm Champion Global Loss: 6.594874e-10
+Iteration 02/30 | Swarm Champion Global Loss: 2.153077e-10
+Iteration 03/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 04/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 05/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 06/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 07/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 08/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 09/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 10/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 11/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 12/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 13/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 14/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 15/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 16/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 17/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 18/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 19/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 20/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 21/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 22/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 23/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 24/30 | Swarm Champion Global Loss: 1.029118e-10
+Iteration 25/30 | Swarm Champion Global Loss: 5.280855e-11
+Iteration 26/30 | Swarm Champion Global Loss: 5.280855e-11
+Iteration 27/30 | Swarm Champion Global Loss: 5.280855e-11
+Iteration 28/30 | Swarm Champion Global Loss: 5.280855e-11
+Iteration 29/30 | Swarm Champion Global Loss: 5.280855e-11
+Iteration 30/30 | Swarm Champion Global Loss: 5.280855e-11
 [Gravitational Outer Planets Problem (24D)] Polishing PSO Champion via Nelder-Mead Simplex...
 
 ======================================================================
 [HYBRID] Starting high-precision local polishing of the PSO champion...
 ======================================================================
-[HYBRID] Polishing successfully converged in 62 iterations.
+[HYBRID] Polishing successfully converged in 66 iterations.
 
 >>> BENCHMARK 4 COMPLETE <<<
   Baseline Loss : 1.969346e-08
-  Grid Search   : 4.369187e-11
-  Polished Hybrid: 8.355116e-11
-  Accuracy Gain : 235.70x better
-  Optimal Nodes : [0.04447, 0.24135, 0.28187, 0.70951]
+  Grid Search   : 4.832715e-11
+  Polished Hybrid: 8.781080e-12
+  Accuracy Gain : 2242.46x better
+  Optimal Nodes : [0.12668, 0.3376, 0.46193, 0.79523]
+  Time Grid Search: 16181.65 ms
+  Time PSO Search : 93045.45 ms
+  Time Local Polish: 16624.89 ms
+  Total Optimization Time: 125852.00 ms
