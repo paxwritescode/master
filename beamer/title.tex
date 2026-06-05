@@ -1,0 +1,43 @@
+% Данные презентации
+\title{Оптимизация параметров метода Рунге-Кутты эволюционным алгоритмом}
+\author{Елизавета Добрецова, гр. 5040102/40101}
+\institute{Санкт-Петербургский Политехнический Университет Петра Великого}
+\date{10 июня 2026 г.}
+
+\newcommand{\supervisorname}{{\footnotesize\mbox{к. б. н., доц. ВШПМиВФ К.Н. Козлов}}}
+
+% Макет титульного листа
+\setbeamertemplate{title page}{
+	\vspace{10pt}
+	\begin{center}
+		{\setbeamercolor{author}{fg=black!60}\footnotesize\insertinstitute}\par
+		\vspace{25pt}
+		
+		\begin{tcolorbox}[
+			colframe=DeepBlue, 
+			colback=DeepBlue!4!white, 
+			arc=5pt,              
+			boxrule=2.5pt,        
+			halign=center,
+			width=\textwidth, 
+			top=14pt, bottom=14pt, left=6pt, right=6pt
+			]
+			% Шрифт уменьшен с \Huge до \LARGE для аккуратного распределения строк
+			{\usebeamerfont{title}\usebeamercolor[fg]{title}\large\bfseries\inserttitle}
+		\end{tcolorbox}\par
+		
+		\vspace{25pt}
+		
+		{\usebeamerfont{author}\insertauthor}\par
+		\vspace{10pt}
+		
+		{\usebeamerfont{date}\insertdate}\par
+		\vfill
+		
+		{\small \textbf{Научный руководитель:} \supervisorname}
+	\end{center}
+}
+
+\begin{frame}[plain] 
+	\titlepage 
+\end{frame} 

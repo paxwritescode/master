@@ -1,122 +1,22 @@
 \documentclass{beamer}
 
-\usetheme{Boadilla}
+\include{settings/packages}
 
-\usepackage{fontspec}
-\usepackage[english, russian]{babel}
-
-\setmainfont{.AppleSystemUIFont}
-\setsansfont{.AppleSystemUIFont}
-
-\usepackage{tcolorbox}
-\usepackage{breqn}
-\usepackage{amsmath} 
-\usepackage{mathrsfs}
-\usepackage{lipsum} 
-\usepackage[style=apa, sorting=none]{biblatex} 
-\usepackage{hyperref} 
-
-\setbeamertemplate{footline}
-{
-	\leavevmode%
-	\hbox{%
-		\begin{beamercolorbox}[wd=.9\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-			\usebeamerfont{author in head/foot}%
-			\insertsectionnavigationhorizontal{.7\paperwidth}{}{}%
-		\end{beamercolorbox}%
-		\begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-			\usebeamerfont{date in head/foot}
-			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-	\end{beamercolorbox}}%
-	\vskip0pt%
-}
-
-\beamertemplatenavigationsymbolsempty
-
-\addbibresource{resources.bib}
-
-% --- ЦВЕТОВАЯ ПАЛИТРА (Изумрудный темнее, фон светлее) ---
-\definecolor{DeepEmerald}{RGB}{0, 102, 77}     % Сделали темнее и благороднее
-\definecolor{LightEmerald}{RGB}{247, 252, 250}   % Сделали еще светлее, почти белый
-\definecolor{PaleGreenText}{RGB}{100, 160, 130} % Чуть притемнили текст для читаемости на светлом фоне
-\definecolor{Black}{RGB}{35,35,35}
-\definecolor{White}{RGB}{255,255,255}
-\definecolor{Lightgrey}{RGB}{235,237,236}       % Слегка скорректировали серые плашки Boadilla
-\definecolor{Middlegrey}{RGB}{192,193,195}
-
-\setbeamercolor{normal text}{fg=PaleGreenText, bg=LightEmerald}
-
-\setbeamercolor{item projected}{bg=DeepEmerald, fg=White}
-\setbeamercolor{section in toc}{fg=Black, bg=White}
-\setbeamercolor{alerted text}{fg=DeepEmerald}
-
-\setbeamercolor*{palette primary}{fg=DeepEmerald, bg=Lightgrey}
-\setbeamercolor*{palette secondary}{fg=DeepEmerald, bg=Lightgrey}
-\setbeamercolor*{palette tertiary}{bg=DeepEmerald, fg=White}
-\setbeamercolor*{palette quaternary}{fg=DeepEmerald, bg=Black}
-
-\setbeamercolor*{sidebar}{fg=DeepEmerald, bg=Lightgrey}
-\setbeamercolor*{palette sidebar primary}{fg=DeepEmerald}
-\setbeamercolor*{palette sidebar secondary}{fg=White}
-\setbeamercolor*{palette sidebar tertiary}{fg=DeepEmerald}
-\setbeamercolor*{palette sidebar quaternary}{fg=Lightgrey}
-
-\setbeamercolor{titlelike}{parent=palette primary, fg=DeepEmerald}
-\setbeamercolor{frametitle}{bg=Lightgrey, fg=DeepEmerald}
-\setbeamercolor{frametitle right}{bg=Middlegrey}
-
-\setbeamercolor*{separation line}{}
-\setbeamercolor*{fine separation line}{}
-
-\setbeamercolor*{bibliography entry author}{fg=DeepEmerald}
-\setbeamercolor*{bibliography entry note}{fg=DeepEmerald!80!white}
-
-\setbeamercolor{author in head/foot}{fg=White, bg=DeepEmerald!90!black}
-\setbeamercolor{title in head/foot}{fg=White, bg=DeepEmerald}
-\setbeamercolor{date in head/foot}{fg=White, bg=DeepEmerald!80!black}
-
-% Данные презентации
-\title{Оптимизация параметров метода Рунге-Кутты эволюционным алгоритмом}
-\author{Елизавета Добрецова, гр. 5040102/40101}
-\institute{Санкт-Петербургский Политехнический Университет Петра Великого}
-\date{10 июня 2026 г.}
-
-\newcommand{\supervisorname}{{\footnotesize\mbox{к. б. н., доц. ВШПМиВФ К.Н. Козлов}}}
-
-% Макет титульного листа
-\setbeamertemplate{title page}{
-	\vspace{10pt}
-	\begin{center}
-		{\setbeamercolor{author}{fg=black!60}\footnotesize\insertinstitute}\par
-		\vspace{25pt}
-		
-		\begin{tcolorbox}[
-			colframe=DeepEmerald, 
-			colback=DeepEmerald!4!white, 
-			arc=5pt,              
-			boxrule=2.5pt,        
-			halign=center,
-			width=\textwidth, 
-			top=14pt, bottom=14pt, left=6pt, right=6pt
-			]
-			% Шрифт уменьшен с \Huge до \LARGE для аккуратного распределения строк
-			{\usebeamerfont{title}\usebeamercolor[fg]{title}\LARGE\bfseries\inserttitle}
-		\end{tcolorbox}\par
-		
-		\vspace{25pt}
-		
-		{\usebeamerfont{author}\insertauthor}\par
-		\vspace{10pt}
-		
-		{\usebeamerfont{date}\insertdate}\par
-		\vfill
-		
-		{\small \textbf{Научный руководитель:} \supervisorname}
-	\end{center}
-}
+\include{settings/preferences}
 
 \begin{document}
-	\begin{frame}[plain] 
-		\titlepage 
-	\end{frame} 
+	\input{title}
+	\input{intro} 
+	\input{theory_rk}
+	\input{theory_opt}
+	\input{test_problems}
+	\input{problem_statement}
+	\input{software}
+	\input{results_img_osc_nls}
+	\input{results_img_2B_5OB}
+	\input{results_num}
+	\input{ext_osc_nls}
+	\input{findings}
+	\input{conclusion}
+	
 \end{document}

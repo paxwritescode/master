@@ -1,0 +1,75 @@
+% --- ЦВЕТОВАЯ ПАЛИТРА ---
+\definecolor{Burgundy}{RGB}{100, 20, 37}    % Приглушенный, глубокий бордовый для шапки и подвала
+\definecolor{Ivory}{RGB}{255, 250, 242}    % Мягкий кремовый цвет для текста на плашках и фона слайдов
+\definecolor{DeepBlue}{RGB}{14, 25, 70}    % Строгий темно-синий цвет для основного текста и списков
+\definecolor{Black}{RGB}{35,35,35}
+\definecolor{White}{RGB}{255,255,255}
+\definecolor{Lightgrey}{RGB}{235,237,236}  
+\definecolor{Middlegrey}{RGB}{192,193,195}
+
+\setmainfont{Helvetica Neue}
+\setsansfont{Helvetica Neue}
+
+% Основной text и фон слайдов
+\setbeamercolor{normal text}{fg=DeepBlue, bg=Ivory}
+
+% Элементы списков и структуры (текстовый контент)
+\setbeamercolor{structure}{fg=DeepBlue}
+\setbeamercolor{item}{fg=DeepBlue}
+\setbeamercolor{item projected}{bg=DeepBlue, fg=Ivory}
+\setbeamercolor{subitem}{fg=DeepBlue}
+\setbeamercolor{alerted text}{fg=DeepBlue}
+
+% Настройки блоков (плашек)
+\setbeamercolor{block title}{bg=DeepBlue!20, fg=DeepBlue}
+\setbeamercolor{block body}{bg=DeepBlue!5, fg=DeepBlue}
+
+% Оглавление
+\setbeamercolor{section in toc}{fg=DeepBlue, bg=White}
+
+% Палитры Beamer темы Boadilla
+\setbeamercolor*{palette primary}{fg=DeepBlue, bg=Lightgrey}
+\setbeamercolor*{palette secondary}{fg=DeepBlue, bg=Lightgrey}
+\setbeamercolor*{palette tertiary}{bg=Burgundy, fg=Ivory} 
+\setbeamercolor*{palette quaternary}{fg=DeepBlue, bg=Black}
+
+% ШАПКА (ВЕРХНЯЯ ПОЛОСА — ЗАГОЛОВОК СЛАЙДА)
+\setbeamercolor{title}{fg=Burgundy}
+\setbeamercolor{titlelike}{fg=Burgundy}
+\setbeamercolor{frametitle}{bg=Burgundy, fg=Ivory}     % Сплошной приглушенный бордовый фон, кремовый текст
+\setbeamercolor{frametitle right}{bg=Burgundy}         % Убираем серый угол Boadilla, делая полосу монолитной
+
+% ПОДВАЛ (НИЖНЯЯ ПОЛОСА)
+\setbeamercolor{author in head/foot}{fg=Ivory, bg=Burgundy}
+\setbeamercolor{title in head/foot}{fg=Ivory, bg=Burgundy}
+\setbeamercolor{date in head/foot}{fg=Ivory, bg=Burgundy}
+
+\setbeamercolor*{sidebar}{fg=DeepBlue, bg=Lightgrey}
+\setbeamercolor*{palette sidebar primary}{fg=DeepBlue}
+\setbeamercolor*{palette sidebar secondary}{fg=Ivory}
+\setbeamercolor*{palette sidebar tertiary}{fg=DeepBlue}
+\setbeamercolor*{palette sidebar quaternary}{fg=Lightgrey}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamercolor*{bibliography entry author}{fg=DeepBlue}
+\setbeamercolor*{bibliography entry note}{fg=DeepBlue!80!white}
+
+% Шаблон подвала
+\setbeamertemplate{footline}
+{
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=.9\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			\usebeamerfont{author in head/foot}%
+			\insertsectionnavigationhorizontal{.7\paperwidth}{}{}%
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+			\usebeamerfont{date in head/foot}
+			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+	\end{beamercolorbox}}%
+	\vskip0pt%
+}
+
+\usetheme{Boadilla}

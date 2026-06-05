@@ -1,0 +1,32 @@
+\begin{frame}{Постановка задачи}
+	
+	\begin{block}{Параметрический метод Рунге--Кутты}
+		\[
+		(A,b,c)=(A(\theta),b(\theta),c(\theta)),
+		\]
+		\[
+		\theta=(c_2,c_4,c_5,c_7)\in\Omega\subset\mathbb{R}^4.
+		\]
+	\end{block}
+	
+	\begin{block}{Допустимое множество параметров}
+		\[
+		\Omega=
+		\left\{
+		\theta\in[0,1]^4:
+		c_2\le c_4\le c_5\le c_7
+		\right\}.
+		\]
+	\end{block}
+	
+	\begin{block}{Задача оптимизации}
+		\[
+		\theta^*=
+		\arg\min_{\theta\in\Omega}
+		C(\theta),
+		\]
+		где $C(\theta)$ — функционал глобальной ошибки
+		на наборе тестовых осциллирующих задач.
+	\end{block}
+	
+\end{frame}

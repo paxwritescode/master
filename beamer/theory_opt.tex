@@ -1,0 +1,65 @@
+\begin{frame}{Оптимизация коэффициентов метода}
+	\tiny
+	\begin{block}{Постановка задачи}
+		\[
+		\theta^* = \arg\min_{\theta \in \Omega} C(\theta),
+		\]
+		\[
+		C(\theta)=
+		\frac{1}{M}
+		\sum_{j=1}^{M}
+		\frac{\|E_j(\theta)\|_\infty}
+		{\|\bar E_j\|_\infty}.
+		\]
+	\end{block}
+	
+	\vspace{0.3cm}
+	
+	\textbf{Grid Search}
+	
+	\[
+	\theta=(c_2,c_4,c_5,c_7)\in[0,1]^4,
+	\]
+	
+	\[
+	c_2 \le c_4 \le c_5 \le c_7,
+	\]
+	
+	последовательное измельчение сетки:
+	\[
+	\Delta c = 10^{-1}
+	\rightarrow
+	10^{-2}
+	\rightarrow
+	10^{-3}.
+	\]
+	
+	\vspace{0.3cm}
+	
+	\textbf{Particle Swarm Optimization}
+	
+	\[
+	x_i^{(k+1)}
+	=
+	x_i^{(k)}
+	+
+	v_i^{(k+1)},
+	\]
+	
+	\[
+	v_i^{(k+1)}
+	=
+	\omega v_i^{(k)}
+	+
+	c_1 r_1
+	\left(
+	p_{i,\mathrm{best}}-x_i^{(k)}
+	\right)
+	+
+	c_2 r_2
+	\left(
+	p_{\mathrm{neigh}}-x_i^{(k)}
+	\right).
+	\]
+	
+\end{frame}
