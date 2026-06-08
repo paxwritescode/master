@@ -10,34 +10,49 @@
 \setbeamertemplate{title page}{
 	\vspace{10pt}
 	\begin{center}
-		{\setbeamercolor{author}{fg=black!60}\footnotesize\insertinstitute}\par
+		% Название вуза в цвет палитры (приглушенный синий)
+		{\color{DeepBlue!70}\footnotesize\insertinstitute}\par
 		\vspace{25pt}
 		
 		\begin{tcolorbox}[
-			colframe=DeepBlue, 
-			colback=DeepBlue!4!white, 
-			arc=5pt,              
-			boxrule=2.5pt,        
+			colframe=Burgundy,          % Рамка в цвет шапки — заявляет главный акцент темы
+			colback=Burgundy!5!Ivory,   % Мягкий брусничный отлив, идеально сливающийся с фоном Ivory
+			arc=4pt,                    % Чуть более строгий и элегантный радиус скругления
+			boxrule=1.5pt,              % Облегченная рамка (1.5pt вместо тяжелых 2.5pt)
 			halign=center,
 			width=\textwidth, 
-			top=14pt, bottom=14pt, left=6pt, right=6pt
+			top=16pt, bottom=16pt, left=8pt, right=8pt
 			]
-			% Шрифт уменьшен с \Huge до \LARGE для аккуратного распределения строк
-			{\usebeamerfont{title}\usebeamercolor[fg]{title}\large\bfseries\inserttitle}
+			% Текст заголовка теперь нашего красивого глубокого синего цвета
+			{\color{DeepBlue}\large\bfseries\inserttitle}
 		\end{tcolorbox}\par
 		
 		\vspace{25pt}
 		
-		{\usebeamerfont{author}\insertauthor}\par
-		\vspace{10pt}
+		% Данные автора, даты и руководителя переведены на DeepBlue
+		{\color{DeepBlue}\usebeamerfont{author}\insertauthor}\par
+		\vspace{12pt}
 		
-		{\usebeamerfont{date}\insertdate}\par
+		{\color{DeepBlue!80}\usebeamerfont{date}\insertdate}\par
 		\vfill
 		
-		{\small \textbf{Научный руководитель:} \supervisorname}
+		{\color{DeepBlue}\small \textbf{Научный руководитель:} \supervisorname}
 	\end{center}
 }
 
-\begin{frame}[plain] 
-	\titlepage 
-\end{frame} 
+% Изолированная группа для титульного кадра
+{
+	\setbeamertemplate{background canvas}{
+		\begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
+			% Сначала заливаем холст нашим фирменным кремовым цветом Ivory
+			\fill[Ivory] (0,0) rectangle (\paperwidth,\paperheight);
+			% Накладываем полупрозрачный логотип/здание от левого нижнего угла на весь экран
+			\node[opacity=0.10, anchor=south west] at (0,0) {
+				\includegraphics[width=\paperwidth,height=\paperheight]{poly.png}
+			};
+		\end{tikzpicture}
+	}
+	\begin{frame}[plain] 
+		\titlepage 
+	\end{frame} 
+}

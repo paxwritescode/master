@@ -1,11 +1,22 @@
+\usetheme{Madrid}
+\setbeamersize{text margin left=0.35cm, text margin right=0.35cm}
+
 % --- ЦВЕТОВАЯ ПАЛИТРА ---
-\definecolor{Burgundy}{RGB}{100, 20, 37}    % Приглушенный, глубокий бордовый для шапки и подвала
-\definecolor{Ivory}{RGB}{255, 250, 242}    % Мягкий кремовый цвет для текста на плашках и фона слайдов
-\definecolor{DeepBlue}{RGB}{14, 25, 70}    % Строгий темно-синий цвет для основного текста и списков
-\definecolor{Black}{RGB}{35,35,35}
-\definecolor{White}{RGB}{255,255,255}
-\definecolor{Lightgrey}{RGB}{235,237,236}  
-\definecolor{Middlegrey}{RGB}{192,193,195}
+\definecolor{Burgundy}{RGB}{140, 75, 90}       % Базовый брусничный (для шапки и левой зоны подвала)
+\definecolor{BurgundyMid}{RGB}{165, 105, 120}   % Средний брусничный (для центра подвала)
+\definecolor{BurgundyLight}{RGB}{195, 145, 160} % Светлый брусничный (для правой зоны подвала)
+
+\definecolor{Ivory}{RGB}{255, 251, 245}        % Идеальный благородный кремовый (свежий, но мягкий фон)
+\definecolor{DeepBlue}{RGB}{10, 40, 150}        % Насыщенный синий цвет для текста и формул
+
+\setmainfont{Helvetica Neue}
+\setsansfont{Helvetica Neue}
+
+% Основной текст и фон слайдов
+\setbeamercolor{normal text}{fg=DeepBlue, bg=Ivory}
+
+% МАСКА ДЛЯ ФОРМУЛ: Перекрашиваем всю математику в наш DeepBlue
+\setbeamercolor{math text}{fg=DeepBlue}
 
 \setmainfont{Helvetica Neue}
 \setsansfont{Helvetica Neue}
@@ -24,52 +35,64 @@
 \setbeamercolor{block title}{bg=DeepBlue!20, fg=DeepBlue}
 \setbeamercolor{block body}{bg=DeepBlue!5, fg=DeepBlue}
 
-% Оглавление
-\setbeamercolor{section in toc}{fg=DeepBlue, bg=White}
-
-% Палитры Beamer темы Boadilla
-\setbeamercolor*{palette primary}{fg=DeepBlue, bg=Lightgrey}
-\setbeamercolor*{palette secondary}{fg=DeepBlue, bg=Lightgrey}
+% Палитры Beamer темы Madrid
 \setbeamercolor*{palette tertiary}{bg=Burgundy, fg=Ivory} 
-\setbeamercolor*{palette quaternary}{fg=DeepBlue, bg=Black}
 
-% ШАПКА (ВЕРХНЯЯ ПОЛОСА — ЗАГОЛОВОК СЛАЙДА)
+% ШАПКА (ВЕРХНЯЯ ПОЛОСА — ЗАГОЛОВОК СЛАЙДА) С ГРАДИЕНТОМ И ОБЪЕМОМ
 \setbeamercolor{title}{fg=Burgundy}
 \setbeamercolor{titlelike}{fg=Burgundy}
-\setbeamercolor{frametitle}{bg=Burgundy, fg=Ivory}     % Сплошной приглушенный бордовый фон, кремовый текст
-\setbeamercolor{frametitle right}{bg=Burgundy}         % Убираем серый угол Boadilla, делая полосу монолитной
 
-% ПОДВАЛ (НИЖНЯЯ ПОЛОСА)
+\makeatletter  % Включаем режим чтения системных переменных Beamer
+\setbeamertemplate{frametitle}{%
+	\nointerlineskip%
+	\hspace*{-\beamer@leftmargin}% Точный сдвиг к абсолютному левому краю слайда
+	\begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
+		% 1. Горизонтальный градиент шапки ровно во всю ширину экрана
+		\shade[left color=Burgundy, right color=BurgundyMid] (0,0) rectangle (\paperwidth,0.9);
+		
+		% 2. Текст заголовка слайда (красивый фиксированный отступ)
+		\node[anchor=west, text=Ivory, align=left] at (0.6, 0.45) {%
+			\usebeamerfont{frametitle}\insertframetitle%
+		};
+	\end{tikzpicture}\par%
+	\nointerlineskip%
+	\hspace*{-\beamer@leftmargin}% Точный сдвиг тени к левому краю
+	\begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
+		% 3. Ослабленная, мягкая тень (смешиваем с Ivory для идеального размытия)
+		\shade[top color=black!10!Ivory, bottom color=Ivory] (0,0) rectangle (\paperwidth,0.06);
+	\end{tikzpicture}\par%
+	\vspace*{-1ex}% Корректируем микропробел перед текстом слайда
+}
+\makeatother   % Выключаем режим чтения системных переменных
+
+% ПОДВАЛ (НИЖНЯЯ ПОЛОСА) — Элегантный градиент слева направо
 \setbeamercolor{author in head/foot}{fg=Ivory, bg=Burgundy}
-\setbeamercolor{title in head/foot}{fg=Ivory, bg=Burgundy}
-\setbeamercolor{date in head/foot}{fg=Ivory, bg=Burgundy}
+\setbeamercolor{title in head/foot}{fg=Ivory, bg=BurgundyMid}
+\setbeamercolor{date in head/foot}{fg=DeepBlue, bg=BurgundyLight}
 
-\setbeamercolor*{sidebar}{fg=DeepBlue, bg=Lightgrey}
+% Кастомизация содержимого подвала (без даты, максимум места под заголовок)
+\setbeamertemplate{footline}{
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=.20\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			\usebeamerfont{author in head/foot}Елизавета Добрецова
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.70\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\insertshorttitle
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.10\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+			\usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
+		\end{beamercolorbox}%
+	}%
+	\vspace*{0pt}%
+}
+
 \setbeamercolor*{palette sidebar primary}{fg=DeepBlue}
 \setbeamercolor*{palette sidebar secondary}{fg=Ivory}
 \setbeamercolor*{palette sidebar tertiary}{fg=DeepBlue}
-\setbeamercolor*{palette sidebar quaternary}{fg=Lightgrey}
 
 \setbeamercolor*{separation line}{}
 \setbeamercolor*{fine separation line}{}
 
 \setbeamercolor*{bibliography entry author}{fg=DeepBlue}
 \setbeamercolor*{bibliography entry note}{fg=DeepBlue!80!white}
-
-% Шаблон подвала
-\setbeamertemplate{footline}
-{
-	\leavevmode%
-	\hbox{%
-		\begin{beamercolorbox}[wd=.9\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-			\usebeamerfont{author in head/foot}%
-			\insertsectionnavigationhorizontal{.7\paperwidth}{}{}%
-		\end{beamercolorbox}%
-		\begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-			\usebeamerfont{date in head/foot}
-			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-	\end{beamercolorbox}}%
-	\vskip0pt%
-}
-
-\usetheme{Boadilla}

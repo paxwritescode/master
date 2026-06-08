@@ -1,32 +1,49 @@
 \begin{frame}{Постановка задачи}
+	\vfill % Верхняя «пружина» — отодвигает текст от шапки к центру
 	
-	\begin{block}{Параметрический метод Рунге--Кутты}
-		\[
-		(A,b,c)=(A(\theta),b(\theta),c(\theta)),
-		\]
-		\[
-		\theta=(c_2,c_4,c_5,c_7)\in\Omega\subset\mathbb{R}^4.
-		\]
-	\end{block}
+	Система условий порядка (44 нелинейных уравнения) для явного метода 6-го порядка недоопределена и допускает параметризацию с 4 степенями свободы:
+	\begin{tcolorbox}[
+		colframe=DeepBlue!35,       % Тонкий приглушенный синий контур
+		colback=DeepBlue!1!Ivory,    % Мягкий фон, плавно сливающийся с Ivory
+		boxrule=0.5pt,               % Ультратонкая рамка
+		arc=3pt,                     % Легкое скругление
+		top=4pt, bottom=4pt, left=4pt, right=4pt,
+		before=\vspace{2pt}, after=\vspace{4pt}
+		]
+		\centering
+		$\displaystyle
+		(A, \mathbf{b}, \mathbf{c}) = (A(\theta), \mathbf{b}(\theta), \mathbf{c}(\theta)), \quad 
+		\theta = (c_2, c_4, c_5, c_7) \in \mathbb{R}^4$
+	\end{tcolorbox}
 	
-	\begin{block}{Допустимое множество параметров}
-		\[
-		\Omega=
-		\left\{
-		\theta\in[0,1]^4:
-		c_2\le c_4\le c_5\le c_7
-		\right\}.
-		\]
-	\end{block}
+	\vspace{0.2cm}
 	
-	\begin{block}{Задача оптимизации}
-		\[
-		\theta^*=
-		\arg\min_{\theta\in\Omega}
-		C(\theta),
-		\]
-		где $C(\theta)$ — функционал глобальной ошибки
-		на наборе тестовых осциллирующих задач.
-	\end{block}
+	Допустимое множество параметров и условие монотонности узлов:
+	\begin{tcolorbox}[
+		colframe=Burgundy!35,       % Брусничный контур
+		colback=Burgundy!1!Ivory,    % Мягкий брусничный отлив
+		boxrule=0.5pt, arc=3pt, 
+		top=4pt, bottom=4pt, left=4pt, right=4pt,
+		before=\vspace{2pt}, after=\vspace{4pt}
+		]
+		\centering
+		$\displaystyle
+		\Omega = \left\{ \theta \in [0, 1]^4 : c_2 \le c_4 \le c_5 \le c_7 \right\}$
+	\end{tcolorbox}
 	
+	\vspace{0.2cm}
+	
+	Задача условной минимизации:
+	\begin{tcolorbox}[
+		colframe=Burgundy!35, colback=Burgundy!1!Ivory, 
+		boxrule=0.5pt, arc=3pt, 
+		top=4pt, bottom=4pt, left=4pt, right=4pt,
+		before=\vspace{2pt}, after=\vspace{0pt}
+		]
+		\centering
+		$\displaystyle
+		\theta^* = \arg\min_{\theta \in \Omega} C(\theta)$
+	\end{tcolorbox}
+	
+	\vfill % Нижняя «пружина» — отодвигает текст от подвала к центру
 \end{frame}

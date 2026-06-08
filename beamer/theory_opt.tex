@@ -1,65 +1,71 @@
-\begin{frame}{Оптимизация коэффициентов метода}
-	\tiny
-	\begin{block}{Постановка задачи}
-		\[
-		\theta^* = \arg\min_{\theta \in \Omega} C(\theta),
-		\]
-		\[
-		C(\theta)=
-		\frac{1}{M}
-		\sum_{j=1}^{M}
-		\frac{\|E_j(\theta)\|_\infty}
-		{\|\bar E_j\|_\infty}.
-		\]
-	\end{block}
+\begin{frame}{Критерий качества и методы оптимизации}
+	\vfill % Автоматический баланс отступов сверху и снизу слайда
 	
-	\vspace{0.3cm}
+	Целевая функция:
+	\begin{tcolorbox}[
+		colframe=Burgundy!35,       % Брусничный контур
+		colback=Burgundy!1!Ivory,    % Мягкий брусничный отлив
+		coltext=DeepBlue,            % Синий цвет для текста внутри
+		boxrule=0.5pt, arc=3pt, 
+		top=5pt, bottom=5pt, left=4pt, right=4pt,
+		before=\vspace{2pt}, after=\vspace{3pt}
+		]
+		\centering
+		$\displaystyle
+		\theta^* = \arg\min_{\theta \in \Omega} C(\theta), \quad
+		C(\theta) = \frac{1}{M} \sum_{j=1}^{M} \frac{\|E_j(\theta)\|_\infty}{\|\bar E_j\|_\infty}$
+	\end{tcolorbox}
+	\vspace{-2pt}
+	{\footnotesize $E_j(\theta)$ — вектор погрешности на $j$-й тестовой задаче, \\ $\bar E_j$ — погрешность базового метода.}
 	
-	\textbf{Grid Search}
+	\vspace{0.1cm}
 	
-	\[
-	\theta=(c_2,c_4,c_5,c_7)\in[0,1]^4,
-	\]
+	\begin{columns}[T]
+		
+		% --- ЛЕВАЯ КОЛОНКА: СЕТОЧНЫЙ ПОИСК ---
+		\begin{column}{0.40\textwidth}
+			Сеточный поиск:
+			\begin{tcolorbox}[
+				colframe=DeepBlue!35, 
+				colback=DeepBlue!1!Ivory, 
+				coltext=DeepBlue,            % Синий цвет для текста внутри
+				boxrule=0.5pt, arc=3pt, 
+				top=6pt, bottom=6pt, left=4pt, right=4pt,
+				before=\vspace{2pt}, after=\vspace{0pt}
+				]
+				\centering
+				$\displaystyle \theta \in [0, 1]^4 \cap \Omega$
+				
+				\vspace{0.25cm}
+				$\displaystyle \Delta c: 10^{-1} \rightarrow 10^{-2} \rightarrow 10^{-3}$
+			\end{tcolorbox}
+		\end{column}
+		
+		% --- ПРАВАЯ КОЛОНКА: МЕТОД РОЯ ЧАСТИЦ (PSO) ---
+		\begin{column}{0.56\textwidth}
+			Метод роя частиц (PSO):
+			\begin{tcolorbox}[
+				colframe=DeepBlue!35, 
+				colback=DeepBlue!1!Ivory, 
+				coltext=DeepBlue,            % Все слова внутри рамки станут DeepBlue!
+				boxrule=0.5pt, arc=3pt, 
+				top=6pt, bottom=6pt, left=4pt, right=4pt,
+				before=\vspace{2pt}, after=\vspace{0pt}
+				]
+				{\footnotesize Коррекция координат частиц:}
+				{\centering $\displaystyle x_i^{(k+1)} = x_i^{(k)} + v_i^{(k+1)}$ \par}
+				
+				\vspace{0.15cm}
+				{\footnotesize Модификация вектора скорости:}
+				{\centering $\displaystyle
+					\begin{aligned}
+						v_i^{(k+1)} = \omega v_i^{(k)} &+ c_1 r_1 \left( p_{i,\mathrm{best}} - x_i^{(k)} \right) + \\
+						&+ c_2 r_2 \left( p_{\mathrm{neigh}} - x_i^{(k)} \right)
+					\end{aligned}$ \par}
+			\end{tcolorbox}
+		\end{column}
+		
+	\end{columns}
 	
-	\[
-	c_2 \le c_4 \le c_5 \le c_7,
-	\]
-	
-	последовательное измельчение сетки:
-	\[
-	\Delta c = 10^{-1}
-	\rightarrow
-	10^{-2}
-	\rightarrow
-	10^{-3}.
-	\]
-	
-	\vspace{0.3cm}
-	
-	\textbf{Particle Swarm Optimization}
-	
-	\[
-	x_i^{(k+1)}
-	=
-	x_i^{(k)}
-	+
-	v_i^{(k+1)},
-	\]
-	
-	\[
-	v_i^{(k+1)}
-	=
-	\omega v_i^{(k)}
-	+
-	c_1 r_1
-	\left(
-	p_{i,\mathrm{best}}-x_i^{(k)}
-	\right)
-	+
-	c_2 r_2
-	\left(
-	p_{\mathrm{neigh}}-x_i^{(k)}
-	\right).
-	\]
-	
+	\vfill
 \end{frame}

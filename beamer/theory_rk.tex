@@ -1,42 +1,93 @@
 \begin{frame}{Методы Рунге--Кутты}
-	\tiny
-	\begin{itemize}
-		\item Решение задачи Коши
-		\[
-		y' = f(t,y), \qquad y(t_0)=y_0.
-		\]
+	\begin{columns}[T] % Выравнивание колонок по верхнему краю
 		
-		\vspace{0.2cm}
+		% --- ЛЕВАЯ КОЛОНКА (МАТЕМАТИЧЕСКАЯ ПОСТАНОВКА) ---
+		\begin{column}{0.52\textwidth}
+			Задача Коши:
+			\begin{tcolorbox}[
+				colframe=DeepBlue!35,       % Тонкий приглушенный синий контур
+				colback=DeepBlue!1!Ivory,    % Мягкий фон, плавно сливающийся с Ivory
+				boxrule=0.5pt,               % Ультратонкая рамка
+				arc=3pt,                     % Легкое скругление
+				top=4pt, bottom=4pt, left=4pt, right=4pt,
+				before=\vspace{1pt}, after=\vspace{3pt}
+				]
+				\centering
+				$\displaystyle
+				\begin{cases}
+					\mathbf{y'} = \mathbf{f}(t, \mathbf{y}), \quad t \in [t_0, T] \\ 
+					\mathbf{y}(t_0) = \mathbf{y}_0 
+				\end{cases}$
+			\end{tcolorbox}
+			
+			Стадии метода ($i = \overline{1, s}$): 
+			\begin{tcolorbox}[
+				colframe=DeepBlue!35, colback=DeepBlue!1!Ivory, 
+				boxrule=0.5pt, arc=3pt, 
+				top=5pt, bottom=5pt, left=4pt, right=4pt,
+				before=\vspace{1pt}, after=\vspace{3pt}
+				]
+				\centering
+				$\displaystyle
+				\mathbf{k}_i = \mathbf{f}\left(t_n + c_i h, \, \mathbf{y}_n + h \sum_{j = 1}^{i - 1} a_{ij} \mathbf{k}_j\right)$
+			\end{tcolorbox}
+			
+			На новом временном слое:
+			\begin{tcolorbox}[
+				colframe=DeepBlue!35, colback=DeepBlue!1!Ivory, 
+				boxrule=0.5pt, arc=3pt, 
+				top=5pt, bottom=5pt, left=4pt, right=4pt,
+				before=\vspace{1pt}, after=\vspace{0pt}
+				]
+				\centering
+				$\displaystyle
+				\mathbf{y}_{n + 1} = \mathbf{y}_n + h \sum_{i = 1}^s b_i \mathbf{k}_i$
+			\end{tcolorbox}
+		\end{column}
 		
-		\item Общий вид $s$-стадийного метода:
-		\[
-		y_{n+1}=y_n+h\sum_{i=1}^{s} b_i k_i.
-		\]
+		% --- ПРАВАЯ КОЛОНКА (ТАБЛИЦЫ БУТЧЕРА И СОГЛАСОВАННОСТЬ) ---
+		\begin{column}{0.46\textwidth}
+			Таблица Бутчера:
+			\begin{tcolorbox}[
+				colframe=Burgundy!35,       % Брусничный контур
+				colback=Burgundy!1!Ivory,    % Мягкий брусничный отлив
+				boxrule=0.5pt, arc=3pt, 
+				top=5pt, bottom=5pt, left=8pt, right=4pt,
+				before=\vspace{1pt}, after=\vspace{3pt}
+				]
+				\small
+				$\displaystyle
+				\begin{array}{c|cccc}
+					0      &          &          &             &   \\
+					c_2    & a_{21}   &          &             &   \\
+					\vdots & \vdots   & \ddots   &             &   \\
+					c_s    & a_{s1}   & \dots    & a_{s,s-1}   &   \\
+					\hline
+					& b_1      & \dots    & b_{s-1}     & b_s
+				\end{array}$
+				
+				\vspace{0.15cm} % Слегка ужали внутренний разделитель таблиц
+				
+				$\displaystyle
+				\begin{array}{c|c}
+					\mathbf{c} & A \\
+					\hline
+					& \mathbf{b}^T
+				\end{array}$
+			\end{tcolorbox}
+			
+			Условие согласованности: 
+			\begin{tcolorbox}[
+				colframe=Burgundy!35, colback=Burgundy!1!Ivory, 
+				boxrule=0.5pt, arc=3pt, 
+				top=5pt, bottom=5pt, left=4pt, right=4pt,
+				before=\vspace{1pt}, after=\vspace{0pt}
+				]
+				\centering
+				$\displaystyle
+				c_i = \sum_{j=1}^{i-1} a_{ij}$
+			\end{tcolorbox}
+		\end{column}
 		
-		\vspace{0.2cm}
-		
-		\item Коэффициенты метода задаются таблицей Бутчера
-		\[
-		\begin{array}{c|c}
-			c & A \\
-			\hline
-			& b^T
-		\end{array}
-		\]
-		
-		\vspace{0.2cm}
-		
-		\item Для методов высокого порядка возникает система нелинейных условий порядка.
-		
-		\vspace{0.2cm}
-		
-		\item После выполнения условий порядка остаются свободные параметры:
-		\[
-		\theta=(c_2,c_4,c_5,c_7).
-		\]
-		
-		\item Задача работы:
-		подбор параметров $\theta$ для осциллирующих задач.
-	\end{itemize}
-	
+	\end{columns}
 \end{frame}
