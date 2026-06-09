@@ -1,56 +1,59 @@
 \begin{frame}{Критерий качества и методы оптимизации}
 	\vfill % Автоматический баланс отступов сверху и снизу слайда
 	
-	Целевая функция:
+	Целевой функционал:
 	\begin{tcolorbox}[
 		colframe=Burgundy!35,       % Брусничный контур
 		colback=Burgundy!1!Ivory,    % Мягкий брусничный отлив
 		coltext=DeepBlue,            % Синий цвет для текста внутри
 		boxrule=0.5pt, arc=3pt, 
-		top=5pt, bottom=5pt, left=4pt, right=4pt,
+		top=3pt, bottom=3pt, left=4pt, right=4pt,
 		before=\vspace{2pt}, after=\vspace{3pt}
 		]
 		\centering
 		$\displaystyle
-		\theta^* = \arg\min_{\theta \in \Omega} C(\theta), \quad
-		C(\theta) = \frac{1}{M} \sum_{j=1}^{M} \frac{\|E_j(\theta)\|_\infty}{\|\bar E_j\|_\infty}$
+		\theta^* = \arg\min_{\theta \in \Omega} \mathcal{F}(\theta) \quad
+		\mathcal{F}(\theta) = \frac{1}{M} \sum_{j=1}^{M} \frac{\|E_j(\theta)\|_\infty}{\|\bar E_j\|_\infty}$
 	\end{tcolorbox}
 	\vspace{-2pt}
-	{\footnotesize $E_j(\theta)$ — вектор погрешности на $j$-й тестовой задаче, \\ $\bar E_j$ — погрешность базового метода.}
+	{\footnotesize $E_j(\theta)$ — вектор погрешности на $j$-й тестовой задаче, \\ $\bar E_j$ — вектор погрешности классического метода (непараметрического 6-го порядка).}
 	
-	\vspace{0.1cm}
+	\vspace{0.05cm}
 	
 	\begin{columns}[T]
 		
 		% --- ЛЕВАЯ КОЛОНКА: СЕТОЧНЫЙ ПОИСК ---
-		\begin{column}{0.40\textwidth}
+		\begin{column}{0.45\textwidth}
 			Сеточный поиск:
 			\begin{tcolorbox}[
 				colframe=DeepBlue!35, 
 				colback=DeepBlue!1!Ivory, 
-				coltext=DeepBlue,            % Синий цвет для текста внутри
+				coltext=DeepBlue, 
 				boxrule=0.5pt, arc=3pt, 
-				top=6pt, bottom=6pt, left=4pt, right=4pt,
-				before=\vspace{2pt}, after=\vspace{0pt}
+				top=3pt, bottom=3pt, left=4pt, right=4pt,
+				before=\vspace{2pt}, after=\vspace{0pt},
+				equal height group=opt_methods, % <--- 1. Объединяем рамки в одну группу по высоте
+				valign=center                  % <--- 2. Центрируем разреженный текст по вертикали
 				]
 				\centering
 				$\displaystyle \theta \in [0, 1]^4 \cap \Omega$
 				
 				\vspace{0.25cm}
-				$\displaystyle \Delta c: 10^{-1} \rightarrow 10^{-2} \rightarrow 10^{-3}$
+				\footnotesize{$\displaystyle \Delta c_i: \: 0.1 \rightarrow 0.04 \rightarrow 0.02 \rightarrow 0.01$}
 			\end{tcolorbox}
 		\end{column}
 		
 		% --- ПРАВАЯ КОЛОНКА: МЕТОД РОЯ ЧАСТИЦ (PSO) ---
-		\begin{column}{0.56\textwidth}
+		\begin{column}{0.55\textwidth}
 			Метод роя частиц (PSO):
 			\begin{tcolorbox}[
 				colframe=DeepBlue!35, 
 				colback=DeepBlue!1!Ivory, 
-				coltext=DeepBlue,            % Все слова внутри рамки станут DeepBlue!
+				coltext=DeepBlue, 
 				boxrule=0.5pt, arc=3pt, 
-				top=6pt, bottom=6pt, left=4pt, right=4pt,
-				before=\vspace{2pt}, after=\vspace{0pt}
+				top=3pt, bottom=3pt, left=4pt, right=4pt,
+				before=\vspace{2pt}, after=\vspace{0pt},
+				equal height group=opt_methods  % <--- 1. Тот же идентификатор группы
 				]
 				{\footnotesize Коррекция координат частиц:}
 				{\centering $\displaystyle x_i^{(k+1)} = x_i^{(k)} + v_i^{(k+1)}$ \par}

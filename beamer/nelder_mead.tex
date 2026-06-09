@@ -1,0 +1,54 @@
+\begin{frame}{Локальная оптимизация методом Нелдера--Мида}
+	\vfill
+	
+	\begin{columns}[T]
+		
+		% --- ЛЕВАЯ КОЛОНКА: МАТЕМАТИЧЕСКАЯ РОЛЬ ---
+		\begin{column}{0.49\textwidth}
+			\textbf{Назначение и свойства метода:}
+			\begin{tcolorbox}[
+				colframe=DeepBlue!35, 
+				colback=DeepBlue!1!Ivory, 
+				coltext=DeepBlue, 
+				boxrule=0.5pt, arc=3pt, 
+				top=4pt, bottom=4pt, left=4pt, right=4pt,
+				before=\vspace{3pt}, after=\vspace{0pt},
+				equal height group=neldermeadstrict
+				]
+				\footnotesize
+				\begin{itemize}
+					\setlength{\itemsep}{5pt}
+					\item Финишная локальная минимизация в окрестности найденного глобального приближения $\theta_{\text{PSO}}^*$.
+					\item \textbf{Класс метода:} прямой метод безусловной оптимизации (алгоритм деформируемого многогранника).
+					\item Быстрая сходимость в гладких локальных окрестностях без необходимости вычисления градиентов функционала $\mathcal{F}(\theta)$.
+				\end{itemize}
+			\end{tcolorbox}
+		\end{column}
+		
+		% --- ПРАВАЯ КОЛОНКА: ПАРАМЕТРЫ ПОИСКА ---
+		\begin{column}{0.49\textwidth}
+			\textbf{Параметры численной реализации:}
+			\begin{tcolorbox}[
+				colframe=Burgundy!35, 
+				colback=Burgundy!1!Ivory, 
+				coltext=DeepBlue, 
+				boxrule=0.5pt, arc=3pt, 
+				top=4pt, bottom=4pt, left=4pt, right=4pt,
+				before=\vspace{3pt}, after=\vspace{0pt},
+				equal height group=neldermeadstrict
+				]
+				\footnotesize
+				\begin{itemize}
+					\setlength{\itemsep}{5pt}
+					\item Начальный симплекс формируется в окрестности $\theta_{\text{PSO}}^*$ и включает $4+1 = 5$ вершин.
+					\item Итерационное изменение формы симплекса через операторы отражения, растяжения и сжатия.
+					\item Критерий останова — достижение сходимости по функционалу с точностью $\varepsilon = 10^{-7}$.
+					\item \texttt{scipy.optimize}.
+				\end{itemize}
+			\end{tcolorbox}
+		\end{column}
+		
+	\end{columns}
+	
+	\vfill
+\end{frame}

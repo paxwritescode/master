@@ -1,21 +1,32 @@
-% Проверьте наличие в преамбуле:
-% \usepackage{tikz}
-% \usetikzlibrary{positioning, arrows.meta}
-% \usepackage{graphicx}
-
 \begin{frame}{Схема исследования}
 	\begin{center}
-		% Масштабирование по ширине слайда автоматически растянет обновленную 
-		% геометрию блоков, ликвидируя пустые поля сверху и снизу
-		\resizebox{\textwidth}{!}{
+		\resizebox{1.025\textwidth}{!}{
 			\begin{tikzpicture}[
-				node distance=0.4cm,
-				param/.style={rectangle, rounded corners, draw=Burgundy!50, fill=Burgundy!1!Ivory, thick, text width=2.8cm, align=center, font=\small},
-				opt/.style={rectangle, rounded corners, draw=Burgundy!80, fill=Burgundy!5, thick, text width=3.2cm, align=center, font=\small},
-				solver/.style={rectangle, draw=DeepBlue!60, fill=DeepBlue!5, thick, rounded corners, text width=5.4cm, align=left, font=\scriptsize},
-				fitness/.style={rectangle, draw=DeepBlue!60, fill=DeepBlue!5, thick, rounded corners, text width=3.6cm, align=center, font=\small},
-				note/.style={text=DeepBlue!80, align=center, font=\tiny\bfseries},
-				arrow/.style={-Stealth, thick, DeepBlue!80}
+				node distance=0.6cm, % Увеличен зазор между соседними блоками
+				param/.style={rectangle, rounded corners, draw=Burgundy!50, fill=Burgundy!1!Ivory, thick, text width=3.6cm, align=center, font=\large, text=DeepBlue, minimum height=3cm},
+				%
+				opt/.style={rectangle, rounded corners, draw=Burgundy!80, fill=Burgundy!5, thick, text width=4.0cm, align=center, font=\large, text=DeepBlue, minimum height=4.5cm},
+				%
+				solver/.style={rectangle, draw=DeepBlue!60, fill=DeepBlue!5, thick, rounded corners, text width=6.5cm, align=center, font=\large, minimum height=2.2cm, text=DeepBlue},
+				%
+				fitness/.style={rectangle, draw=DeepBlue!60, fill=DeepBlue!5, thick, rounded corners, text width=4.4cm, align=center, font=\large, text=DeepBlue, minimum height=2.5cm},
+				%
+				note_box/.style={
+					rectangle,
+					rounded corners,
+					draw=DeepBlue!40,
+					fill=DeepBlue!1!Ivory,
+					thick,
+					text width=10cm,
+					align=left,
+					font=\Large,
+					text=DeepBlue,
+					minimum height=4cm,
+					inner xsep=14pt,
+					inner ysep=10pt
+				},
+				%
+				arrow/.style={-Stealth,  thick, DeepBlue!80}
 				]
 				
 				% --- ЦЕНТРАЛЬНЫЕ БЛОКИ ---
@@ -23,83 +34,99 @@
 				% Входные параметры
 				\node (start) [param] {
 					\textbf{Входные данные} \\
-					\vspace{4pt}
-					\scriptsize Вектор свободных параметров схемы \\ $\theta \in [0, 1]^4$
+					\vspace{6pt}
+					\raggedright
+					\begin{itemize}
+						\item задача
+						\item $\theta \in [0, 1]^4$
+					\end{itemize}
 				};
 				
 				% Оптимизатор
 				\node (algo) [opt, right=of start] {
-					\textbf{Каскад оптимизации} \\
-					\vspace{4pt}
-					\scriptsize Итерационный поиск минимума функционала $C(\theta)$:\\ 
-					Grid Search $\rightarrow$ \\ PSO $\rightarrow$ Нелдер--Мид
+					\textbf{Оптимизация} \\
+					\vspace{5pt}
+					$\mathcal{F}(\theta) \rightarrow \min$ \\
+					\vspace{8pt}
+					Сеточный поиск \\
+					$\downarrow$ \\
+					Рой частиц (PSO) \\
+					$\downarrow$ \\
+					Нелдер--Мид
 				};
 				
-				% --- ВЕРТИКАЛЬНЫЙ СТЕК ЗАДАЧ КОШИ (РАЗВЕТВЛЕНИЕ) ---
+				% --- ВЕРТИКАЛЬНЫЙ СТЕК ЗАДАЧ КОШИ ---
 				
-				% Задача 2 (базовая для выравнивания)
-				\node (t2) [solver, right=0.9cm of algo, yshift=0.8cm] {
-					2. Уравнение Шрёдингера 2D \\ \quad ($h = 0.05$, $T \le 2$, расчет волновой массы)
+				% Задача 2
+				\node (t2) [solver, right=1.2cm of algo, yshift=1.5cm]{
+					\textbf{2. Уравнение Шрёдингера} \\  ($h = 0.05, \; T \le 2$)
 				};
 				
-				% Задача 1 (сверху от 2)
-				\node (t1) [solver, above=of t2] {
-					1. Гармонический осциллятор \\ \quad ($h = 0.1$, $T \le 10$, тест фазового сдвига)
+				% Задача 1
+				\node (t1) [solver, above=0.2cm of t2] {
+					\textbf{1. Гармонический осциллятор} \\ ($h = 0.1, \; T \le 10$)
 				};
 				
-				% Задача 3 (снизу от 2)
-				\node (t3) [solver, right=0.9cm of algo, yshift=-0.8cm] {
-					3. Задача двух тел \\ \quad ($h = 0.1$, $T \le 15$, кеплеровская орбита)
+				% Задача 3
+				\node (t3) [solver, right=1cm of algo, yshift=-1.5cm] {
+					\textbf{3. Задача двух тел} \\  ($h = 0.1, \; T \le 15$)
 				};
 				
-				% Задача 4 (снизу от 3)
-				\node (t4) [solver, below=of t3] {
-					4. Задача $N$ тел (внешние планеты) \\ \quad ($h = 0.2$, $T \le 20$, 24-мерная система)
+				% Задача 4
+				\node (t4) [solver, below=0.2cm of t3]{
+					\textbf{4. Задача пяти внешних тел} \\  ($h = 0.2, \; T \le 20$)
 				};
 				
 				% --- ПОСЛЕДУЮЩИЕ БЛОКИ ---
 				
-				% Оценка качества (выравнивается по центру относительно блока задач)
-				\node (eval) [fitness, right=0.9cm of t2, yshift=-0.8cm] {
+				% Оценка качества (Сдвиг -2.0cm идеально возвращает блок на центральную ось схемы)
+				\node (eval) [fitness, right=1.2cm of t2, yshift=-1.5cm] {
 					\textbf{Критерий качества} \\
-					\vspace{4pt}
-					\scriptsize Вычисление среднего значения евклидовой нормы погрешности траектории $C(\theta)$
+					\vspace{6pt}
+					Вычисление $\mathcal{F}(\theta)$
 				};
 				
 				% Выходные данные
 				\node (stop) [param, right=of eval] {
 					\textbf{Выходные данные} \\
-					\vspace{4pt}
-					\scriptsize Оптимизированные параметры таблицы Бутчера ($\theta^*$)
+					\vspace{6pt}
+					$\theta^*$
 				};
 				
-				% --- ТЕКСТОВЫЕ АННОТАЦИИ ОБЪЕМА ВЫЧИСЛЕНИЙ ---
-				\node (vol_note) [note, above=0.3cm of t1, text width=6cm] {
-					МАТЕМАТИЧЕСКИЙ ОБЪЕМ ВЫЧИСЛЕНИЙ:\\ 
-					900 полных интегрирований систем ОДУ\\ 
-					на весь цикл поиска PSO для каждого бенчмарка \\
-					(30 частиц $\times$ 30 итераций)
+				\node (info_note)
+				[note_box,
+				anchor=south,
+				at={(t1.north)},
+				yshift=1.2cm,
+				text width=18cm]
+				{
+					MacBook Pro (2019), Intel Core i7 (6 ядер, 2.6 ГГц), 	однопоточные вычисления \\
+					• Оценка $\mathcal{F}(\theta)$ на задачу: 900 раз \\
+					• Итераций алгоритма PSO: 30 \\
+					• Число частиц в рое: 30
 				};
 				
 				% --- СВЯЗИ И СТРЕЛКИ ---
 				
 				\draw [arrow] (start) -- (algo);
-				\draw [arrow] (eval) -- node[above, font=\tiny] {Сошлось} (stop);
+				\draw [arrow] (eval) -- (stop); 
 				
-				% Разветвление стрелок от Оптимизатора к Задачам
-				\draw [arrow] (algo.east) -- ++(0.3,0) |- (t1.west);
-				\draw [arrow] (algo.east) -- ++(0.3,0) |- (t2.west);
-				\draw [arrow] (algo.east) -- ++(0.3,0) |- (t3.west);
-				\draw [arrow] (algo.east) -- ++(0.3,0) |- (t4.west);
+				% Разветвление стрелок от Оптимизатора к Задачам (вынос увеличен до 0.4 для простора)
+				\draw [arrow] (algo.east) -- ++(0.4,0) |- (t1.west);
+				\draw [arrow] (algo.east) -- ++(0.4,0) |- (t2.west);
+				\draw [arrow] (algo.east) -- ++(0.4,0) |- (t3.west);
+				\draw [arrow] (algo.east) -- ++(0.4,0) |- (t4.west);
 				
 				% Схождение стрелок от Задач к Критерию качества
-				\draw [arrow] (t1.east) -- ++(0.3,0) |- (eval.west);
-				\draw [arrow] (t2.east) -- ++(0.3,0) |- (eval.west);
-				\draw [arrow] (t3.east) -- ++(0.3,0) |- (eval.west);
-				\draw [arrow] (t4.east) -- ++(0.3,0) |- (eval.west);
-								
-				% Нижняя петля обратной связи (проходит оптимально под блоком t4)
-				\draw [arrow] (eval.south) -- ++(0,-2) -| node[pos=0.25, below, font=\scriptsize] {Не сошлось: модификация вектора параметров $\theta$ и запуск новой итерации} (algo.south);
+				\coordinate (busR) at ($(eval.west)+(-1.0,0)$);
+				
+				\draw [arrow] (t1.east) -- (busR |- t1.east) |- (eval.west);
+				\draw [arrow] (t2.east) -- (busR |- t2.east) |- (eval.west);
+				\draw [arrow] (t3.east) -- (busR |- t3.east) |- (eval.west);
+				\draw [arrow] (t4.east) -- (busR |- t4.east) |- (eval.west);
+				
+				% Нижняя петля обратной связи (Зазор опущен до -5.6cm, чтобы гарантированно обойти массивный нижний край блока t4)
+				\draw [arrow] (eval.south) -- ++(0,-4.25) -| (algo.south);
 				
 			\end{tikzpicture}
 		}

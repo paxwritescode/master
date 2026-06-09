@@ -97,8 +97,8 @@ def plot_wave_mass_conservation():
     plt.plot(t2, drift2, 'g-.', label='Grid-Optimized Scheme ($h=0.05$)')
     plt.plot(t3, drift3, 'b-', label='PSO-Optimized Scheme ($h=0.05$)')
     
-    plt.xlabel('Time $t$')
-    plt.ylabel('Relative Mass Drift $\Delta M / M_0$')
+    plt.xlabel('$t$')
+    plt.ylabel('$\Delta M / M_0$')
     plt.yscale('log')
     plt.title('2D NLS Invariant (Wave Mass) Conservation Stability')
     plt.legend(loc='lower right')
@@ -130,8 +130,8 @@ def plot_scaling():
     plt.figure(figsize=(6.5, 4.5))
     plt.plot(ode_dimensions, execution_times, 'bo-', linewidth=1.5, label='Semi-discretized 2D NLS Core')
     
-    plt.xlabel('Total ODE System Dimensionality ($2 \times N_x \times N_y$)')
-    plt.ylabel('Integration Execution Time $T$ (s)')
+    plt.xlabel(f'$2 \times N_x \times N_y$')
+    plt.ylabel('$T$ (s)')
     plt.title('Computational Complexity Spatial Scaling Profile')
     plt.legend(loc='upper left')
     plt.tight_layout()
@@ -154,8 +154,8 @@ def plot_optimization_convergence():
     plt.semilogy(iters, loss_grid, 'r--', label='Deterministic Grid Search')
     plt.semilogy(iters, loss_pso, 'b-', linewidth=1.8, label='Modified PSO + Nelder-Mead')
     
-    plt.xlabel('teration')
-    plt.ylabel('$C(\theta)$')
+    plt.xlabel('iteration')
+    plt.ylabel('$\mathcal{F}(\theta)$')
     plt.title('2D NLS Parameter Space Optimization Trajectories')
     plt.legend(loc='upper right')
     plt.tight_layout()

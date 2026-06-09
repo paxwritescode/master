@@ -56,8 +56,8 @@ def plot_harmonic_oscillator():
              color='tab:red', linestyle='--', marker='s', markersize=4, linewidth=1.4, 
              label=f'Optimized RK6 with Large Step ($h = {h_large}$)')
 
-    plt.xlabel('Time $t$', fontsize=11)
-    plt.ylabel('Oscillator Position $x(t)$', fontsize=11)
+    plt.xlabel('$t$', fontsize=11)
+    plt.ylabel('$x(t)$', fontsize=11)
     plt.title('Linear Harmonic Oscillator: Step Size Error Accumulation', fontsize=11, pad=10)
     
     plt.xlim(t_span)
@@ -164,10 +164,10 @@ def plot_nls_components():
     ax1.scatter(x_coarse, r_large_slice, color='darkred', marker='o', s=35, zorder=5, 
                 label='Solver Grid Nodes')
     
-    ax1.set_xlabel('Spatial Coordinate $x$', fontsize=11)
-    ax1.set_ylabel('Real Part $\\mathfrak{R}(u)$', fontsize=11)
+    ax1.set_xlabel('$x$', fontsize=11)
+    ax1.set_ylabel('$\\mathfrak{R}(u)$', fontsize=11)
     ax1.set_title('Real Part $\\mathfrak{R}(u)$ of the Dark Soliton', fontsize=12, pad=10)
-    ax1.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
+    ax1.legend(loc='lower right', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
     ax1.grid(True, linestyle=':', alpha=0.6)
 
     # -------------------------------------------------------------------------
@@ -182,8 +182,8 @@ def plot_nls_components():
     ax2.scatter(x_coarse, i_large_slice, color='darkred', marker='x', s=35, zorder=5, 
                 label='Actual Solver Grid Nodes')
     
-    ax2.set_xlabel('Spatial Coordinate $x$', fontsize=11)
-    ax2.set_ylabel('Imaginary Part $\\mathfrak{I}(u)$', fontsize=11)
+    ax2.set_xlabel('$x$', fontsize=11)
+    ax2.set_ylabel('$\\mathfrak{I}(u)$', fontsize=11)
     ax2.set_title('Imaginary Part $\\mathfrak{I}(u)$ of the Dark Soliton', fontsize=12, pad=10)
     ax2.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
     ax2.grid(True, linestyle=':', alpha=0.6)
@@ -246,13 +246,13 @@ def plot_two_body_orbit():
              label=f'Optimized RK6 ($h = {h_large}$)')
     ax1.scatter([0], [0], color='orange', s=100, zorder=5, label='Central Mass')
     
-    ax1.set_xlabel('x$', fontsize=11)
-    ax1.set_ylabel('y$', fontsize=11)
+    ax1.set_xlabel('$x$', fontsize=11)
+    ax1.set_ylabel('$y$', fontsize=11)
     ax1.set_title('Space Domain: Trajectory Orbit Stability', fontsize=12, pad=10)
-    ax1.set_xlim(-1.5, 1.5)
-    ax1.set_ylim(-1.5, 1.5)
+    ax1.set_xlim(-1.30, 1.30)
+    ax1.set_ylim(-1.30, 1.30)
     ax1.set_aspect('equal') # Keep the circle perfectly round
-    ax1.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
+    ax1.legend(loc='lower left', frameon=True, facecolor='white', edgecolor='gainsboro', fontsize=9)
     ax1.grid(True, linestyle=':', alpha=0.6)
 
     # -------------------------------------------------------------------------
@@ -265,7 +265,7 @@ def plot_two_body_orbit():
     ax2.plot(t_large, u_large[:, 0], color='tab:red', linestyle='--', marker='s', markevery=3, markersize=4, linewidth=1.4, 
              label=f'Optimized RK6 ($h = {h_large}$)')
     
-    ax2.set_xlabel('$Time $t$', fontsize=11)
+    ax2.set_xlabel('$t$', fontsize=11)
     ax2.set_ylabel('$x(t)$', fontsize=11)
     ax2.set_title('Time Domain: Coordinate $x(t)$ Oscillations', fontsize=12, pad=10)
     ax2.set_xlim(t_span)

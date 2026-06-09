@@ -3,7 +3,7 @@
 		
 		% --- ЛЕВАЯ КОЛОНКА (МАТЕМАТИЧЕСКАЯ ПОСТАНОВКА) ---
 		\begin{column}{0.52\textwidth}
-			Задача Коши:
+			Задача Коши, $y \in \mathbb{R}^d$:
 			\begin{tcolorbox}[
 				colframe=DeepBlue!35,       % Тонкий приглушенный синий контур
 				colback=DeepBlue!1!Ivory,    % Мягкий фон, плавно сливающийся с Ivory
@@ -20,7 +20,7 @@
 				\end{cases}$
 			\end{tcolorbox}
 			
-			Стадии метода ($i = \overline{1, s}$): 
+			Стадии метода ($i = \overline{1, s}$, в данной работе $s = 8$): 
 			\begin{tcolorbox}[
 				colframe=DeepBlue!35, colback=DeepBlue!1!Ivory, 
 				boxrule=0.5pt, arc=3pt, 
@@ -32,7 +32,7 @@
 				\mathbf{k}_i = \mathbf{f}\left(t_n + c_i h, \, \mathbf{y}_n + h \sum_{j = 1}^{i - 1} a_{ij} \mathbf{k}_j\right)$
 			\end{tcolorbox}
 			
-			На новом временном слое:
+			На следующем моменте времени:
 			\begin{tcolorbox}[
 				colframe=DeepBlue!35, colback=DeepBlue!1!Ivory, 
 				boxrule=0.5pt, arc=3pt, 

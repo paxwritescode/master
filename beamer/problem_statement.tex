@@ -1,7 +1,8 @@
 \begin{frame}{Постановка задачи}
 	\vfill % Верхняя «пружина» — отодвигает текст от шапки к центру
+	\small
+	Система ограничений (\textbf{44 уравнения}: 37 условий порядка $p=6$ и 7 условий согласованности для $s=8$) недоопределена и допускает параметризацию с 4 степенями свободы:
 	
-	Система условий порядка (44 нелинейных уравнения) для явного метода 6-го порядка недоопределена и допускает параметризацию с 4 степенями свободы:
 	\begin{tcolorbox}[
 		colframe=DeepBlue!35,       % Тонкий приглушенный синий контур
 		colback=DeepBlue!1!Ivory,    % Мягкий фон, плавно сливающийся с Ivory
@@ -12,11 +13,10 @@
 		]
 		\centering
 		$\displaystyle
-		(A, \mathbf{b}, \mathbf{c}) = (A(\theta), \mathbf{b}(\theta), \mathbf{c}(\theta)), \quad 
-		\theta = (c_2, c_4, c_5, c_7) \in \mathbb{R}^4$
+		(A, \mathbf{b}, \mathbf{c}) = (A(\theta), \mathbf{b}(\theta), \mathbf{c}(\theta))$, \\
+		\vspace{2pt}
+		$\displaystyle \theta = (c_2, c_4, c_5, c_7) \in \mathbb{R}^4, \quad A \in \mathbb{R}^{8 \times 8}, \quad \mathbf{b}, \mathbf{c} \in \mathbb{R}^8$
 	\end{tcolorbox}
-	
-	\vspace{0.2cm}
 	
 	Допустимое множество параметров и условие монотонности узлов:
 	\begin{tcolorbox}[
@@ -31,8 +31,6 @@
 		\Omega = \left\{ \theta \in [0, 1]^4 : c_2 \le c_4 \le c_5 \le c_7 \right\}$
 	\end{tcolorbox}
 	
-	\vspace{0.2cm}
-	
 	Задача условной минимизации:
 	\begin{tcolorbox}[
 		colframe=Burgundy!35, colback=Burgundy!1!Ivory, 
@@ -42,7 +40,7 @@
 		]
 		\centering
 		$\displaystyle
-		\theta^* = \arg\min_{\theta \in \Omega} C(\theta)$
+		\theta^* = \arg\min_{\theta \in \Omega} \mathcal{F}(\theta), \quad \mathcal{F}(\theta) \text{ — функционал ошибки}$
 	\end{tcolorbox}
 	
 	\vfill % Нижняя «пружина» — отодвигает текст от подвала к центру

@@ -1,15 +1,16 @@
 \begin{frame}{Задача двух тел}
 	\begin{columns}[T] % Выравнивание колонок по верхнему краю
-		
+		\small
 		\begin{column}{0.625\textwidth}
 			\begin{tcolorbox}[
 				colframe=DeepBlue!35,       % Тонкий приглушенный синий контур
 				colback=DeepBlue!1!Ivory,    % Мягкий фон, плавно сливающийся с Ivory
 				boxrule=0.5pt,               % Ультратонкая рамка
 				arc=3pt,                     % Легкое скругление
-				top=4pt, bottom=5pt, left=4pt, right=4pt,
+				top=2pt, bottom=2pt, left=4pt, right=4pt,
 				before=\vspace{2pt}, after=\vspace{0pt}
 				]
+				\small
 				\vspace{-6pt}
 				\[
 				\begin{cases}
@@ -28,9 +29,10 @@
 				colframe=DeepBlue!35, 
 				colback=DeepBlue!1!Ivory, 
 				boxrule=0.5pt, arc=3pt, 
-				top=4pt, bottom=5pt, left=4pt, right=4pt,
+				top=2pt, bottom=2pt, left=4pt, right=4pt,
 				before=\vspace{2pt}, after=\vspace{0pt}
 				]
+				\small
 				\vspace{-6pt}
 				\[
 				\begin{cases}
@@ -44,10 +46,13 @@
 		\end{column}
 		
 	\end{columns}
-	
-	\vspace{0.15cm}
-	
+	\vspace{0.1cm}
 	\centering
-	\includegraphics[height=0.42\textheight]{../code/results/visualization/twobody_orbit_comparison}
+	\includegraphics[height=0.495\textheight]{../code/results/visualization/twobody_orbit_comparison}
+	
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[opacity=0.05, inner sep=0pt] at (current page.center) 
+		{\includegraphics[width=\paperwidth]{three_body}}; 
+	\end{tikzpicture}
 	
 \end{frame}
